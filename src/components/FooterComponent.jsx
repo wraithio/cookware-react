@@ -32,7 +32,7 @@ const FooterComponent = () => {
             <div className="col-4 flex flex-col gap-3">
                 <h3 className='text-2xl text-start'>Subscribe to our newsletter to be the first to know about new products and special events</h3>
                 <input type="text" placeholder='Enter email address' />
-                <button className="hover:text-green-950 hover:bg-white w-fit text-start border-2 border-white text-white bg-transparent  px-8 py-2">SUBSCRIBE</button>
+                <button className="w-fit text-start border-2 border-white text-white bg-transparent px-8 py-2 hover:text-green-950 hover:bg-white">SUBSCRIBE</button>
             </div>
         </div>
     </div>

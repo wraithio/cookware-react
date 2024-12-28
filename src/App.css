@@ -72,10 +72,11 @@ h1,h2{
   font-family: "Roboto-Bold",Arial, Helvetica, sans-serif;
 }
 
+
+
 .row{
   width: 100%;
 }
-
 .circle-red {
   height: 25px;
   width: 25px;
@@ -124,4 +125,8 @@ h1,h2{
   background-color: #292828;
   margin: 5px;
   margin-top: 0px;
+}
+
+input{
+  width: 50%;
 }

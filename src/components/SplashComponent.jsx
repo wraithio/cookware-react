@@ -3,7 +3,7 @@ import React from 'react'
 const SplashComponent = () => {
   return (
     <>
-    <div className="bg-[url(/images/hero.jpg)] bg-center bg-no-repeat h-[1000px] relative">
+    <div className="bg-[url(/images/hero.jpg)] bg-cover bg-center bg-no-repeat h-[1000px] w-full relative">
       <p className="absolute bottom-28 left-20 bg-black/65 text-white text-5xl p-4">Cookware Built To Last</p>
     </div>
     <div>
