@@ -2,11 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Roboto";
-  src: url(/src/assets/fonts/Roboto-Black.ttf);
-}
-.pageFormat{
-  font-family: "Roboto",Arial, Helvetica, sans-serif;
-  background-color: aquamarine; 
-}

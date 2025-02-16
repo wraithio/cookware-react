@@ -40,3 +40,34 @@
 .read-the-docs {
   color: #888;
 }
+
+@font-face {
+  font-family: "Roboto";
+  src: url(/src/assets/fonts/Roboto-Regular.ttf);
+}
+@font-face {
+  font-family: "Roboto-Thin";
+  src: url(/src/assets/fonts/Roboto-Thin.ttf);
+}
+@font-face {
+  font-family: "Roboto-Bold";
+  src: url(/src/assets/fonts/Roboto-Bold.ttf);
+}
+@font-face {
+  font-family: "Roboto-Medium";
+  src: url(/src/assets/fonts/Roboto-Medium.ttf);
+}
+body{
+  font-family: "Roboto",Arial, Helvetica, sans-serif;
+  color: #292828;
+  background-color: #ededed;
+}
+#root{
+  margin: 0px;
+  padding: 0px;
+  max-width: 100%;
+}
+
+h1,h2{
+  font-family: "Roboto-Bold",Arial, Helvetica, sans-serif;
+}
