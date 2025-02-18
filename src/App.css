@@ -71,3 +71,57 @@ body{
 h1,h2{
   font-family: "Roboto-Bold",Arial, Helvetica, sans-serif;
 }
+
+.row{
+  width: 100%;
+}
+
+.circle-red {
+  height: 25px;
+  width: 25px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: #ea2d2c;
+  margin: 5px;
+  margin-top: 0px;
+}
+
+.circle-border {
+  border: 1px solid black;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: transparent;
+  margin: -2.5px;
+  margin-top: -2.5px;
+}
+
+.circle-orange {
+  height: 25px;
+  width: 25px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: #fb5108;
+  margin: 5px;
+  margin-top: 0px;
+}
+
+.circle-yellow {
+  height: 25px;
+  width: 25px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: #d29d12;
+  margin: 5px;
+  margin-top: 0px;
+}
+
+.circle-grey {
+  height: 25px;
+  width: 25px;
+  margin: 10px;
+  border-radius: 50%;
+  background-color: #292828;
+  margin: 5px;
+  margin-top: 0px;
+}
