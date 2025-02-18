@@ -1,6 +1,4 @@
 import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 import CardComponent from "./components/CardComponent";
 
@@ -10,36 +8,36 @@ function App() {
   return (
     <div className="mx-auto">
       <h1 className="text-6xl mt-28 mb-8">Start Cooking</h1>
-      <div className="flex row">
-        <div className="col-3 flex justify-center">
+      <div className="row">
+        <div className="col-3">
           <CardComponent
             src={"/images/StartCooking1.jpeg"}
             title={"Cast Iron Pot"}
-            width={"96"}
+            width={"full"}
             height={"96"}
           />
         </div>
-        <div className="col-3 flex justify-center">
+        <div className="col-3">
           <CardComponent
             src={"/images/StartCooking2.jpeg"}
             title={"Stock Pot"}
-            width={"96"}
+            width={"full"}
             height={"96"}
           />
         </div>
-        <div className="col-3 flex justify-center">
+        <div className="col-3">
           <CardComponent
             src={"/images/StartCooking3.jpeg"}
             title={"Sauce Pan"}
-            width={"96"}
+            width={"full"}
             height={"96"}
           />
         </div>
-        <div className="col-3 flex justify-center">
+        <div className="col-3">
           <CardComponent
             src={"/images/StartCooking4.jpeg"}
             title={"Accessories"}
-            width={"96"}
+            width={"full"}
             height={"96"}
           />
         </div>
@@ -84,7 +82,7 @@ function App() {
           </h3>
         </div>
         <h1 className="text-6xl mb-20">Best Sellers</h1>
-        <div className="flex row">
+        <div className="row flex">
           <div className="col-4 border-2 border-black p-3 rounded-lg h-fit flex flex-col gap-3">
             <CardComponent
               src={"/images/BestSeller1.jpg"}
