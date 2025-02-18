@@ -143,7 +143,7 @@ function App() {
         </div>
         <h1 className="text-6xl mt-28 mb-8">Reviews</h1>
         <div className="flex row">
-          <div className="col-4 relative bg-[url(/images/Reviews1.jpg)] h-[40rem] object-cover">
+          <div className="col-4 relative bg-[url(/images/Reviews1.jpg)] h-[60rem] object-cover">
             <div className="top-[20%] bottom[20%] left-[20%] right-[20%] absolute bg-black/50 p-4 flex flex-col gap-4 text-white">
               <h2 className="text-5xl">Wok Star!</h2>
               <h3 className="text-2xl">
@@ -155,7 +155,7 @@ function App() {
               <h3 className="text-2xl">David Jones</h3>
             </div>
           </div>
-          <div className="col-4 relative bg-[url(/images/Reviews2.jpg)] h-[40rem] object-cover text-white">
+          <div className="col-4 relative bg-[url(/images/Reviews2.jpg)] h-[60rem] object-cover text-white">
             <div className="top-[20%] bottom[20%] left-[20%] right-[20%] absolute bg-black/50 p-4 flex flex-col gap-4 text-white">
               <h2 className="text-5xl">Built To Last</h2>
               <h3 className="text-2xl">
@@ -166,7 +166,7 @@ function App() {
               <h3 className="text-2xl">Danielle Johnson</h3>
             </div>
           </div>
-          <div className="col-4 relative bg-[url(/images/Reviews3.jpg)] h-[40rem] object-cover text-white">
+          <div className="col-4 relative bg-[url(/images/Reviews3.jpg)] h-[60rem] object-cover text-white">
             <div className="top-[20%] bottom[20%] left-[20%] right-[20%] absolute bg-black/50 p-4 flex flex-col gap-4 text-white">
               <h2 className="text-5xl">Best Cookware!</h2>
               <h3 className="text-2xl">
