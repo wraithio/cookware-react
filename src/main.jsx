@@ -10,8 +10,7 @@ import FooterComponent from './components/FooterComponent.jsx'
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <NavbarComponent/>
-    <SplashComponent/>
-    <App />
+    <App path="/"/>
     <FooterComponent/>
   </StrictMode>,
 )
