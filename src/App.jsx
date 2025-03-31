@@ -83,7 +83,7 @@ function App() {
           <CardComponent
             src={"/images/BestSeller1.jpg"}
             title={"Stock Pot"}
-            width={"full"}
+            width={"w-full"}
             height={"xl:h-96 h-80"}
           />
           <h3 className="lg:text-2xl text-xl text-start">
@@ -99,7 +99,7 @@ function App() {
           <CardComponent
             src={"/images/BestSeller2.jpg"}
             title={"Stock Pot"}
-            width={"full"}
+            width={"w-full"}
             height={"xl:h-96 h-80"}
           />
           <h3 className="lg:text-lg md:text-md text-xs text-start">
@@ -120,7 +120,7 @@ function App() {
           <CardComponent
             src={"/images/BestSeller3.jpg"}
             title={"Sauce Pan"}
-            width={"full"}
+            width={"w-full"}
             height={"xl:h-96 h-80"}
           />
           <h3 className="lg:text-2xl text-md text-start">
