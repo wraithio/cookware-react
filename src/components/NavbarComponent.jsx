@@ -14,7 +14,7 @@ const NavbarComponent = () => {
           />
         </a>
 
-        <div className="items-center justify-between  flex  w-auto ">
+        <div className="items-center justify-between flex w-auto">
           <div className="flex gap-3">
             <Link to="/cookware">
               <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
