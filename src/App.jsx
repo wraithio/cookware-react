@@ -5,7 +5,8 @@ import NavbarComponent from "./components/NavbarComponent";
 import SplashComponent from "./components/SplashComponent";
 
 function App() {
-  // const [count, setCount] = useState(0);
+  const [newArrivalpic,setNewArrivalpic] = useState("/images/NewArrivals1.jpg")
+
 
   return (
     <div>
@@ -43,7 +44,7 @@ function App() {
       <div className="grid grid-cols-2 gap-3 mx-3">
         <div>
           <CardComponent
-            src={"/images/NewArrivals1.jpg"}
+            src={newArrivalpic}
             title={"Fall Collection"}
             width={"w-full"}
             height={"xl:h-96 h-64"}
@@ -57,13 +58,14 @@ function App() {
               Color: <b>Apple Cinnamon</b>
             </h3>
             <div className="flex">
-              <div className="circle-red cursor-pointer"></div>
-              <div className="circle-orange cursor-pointer"></div>
-              <div className="circle-yellow cursor-pointer"></div>
-              <div className="circle-grey cursor-pointer"></div>
+              <div onClick={() => setNewArrivalpic("/images/NewArrivals1.jpg")} className="circle-red cursor-pointer"></div>
+              <div onClick={() => setNewArrivalpic("/images/ORANGENewArrivals1.png")} className="circle-orange cursor-pointer"></div>
+              <div onClick={() => setNewArrivalpic("/images/GOLDNewArrivals1.png")} className="circle-yellow cursor-pointer"></div>
+              <div onClick={() => setNewArrivalpic("/images/BLACKNewArrivals1.png")} className="circle-grey cursor-pointer"></div>
             </div>
           </div>
         </div>
+
         <div>
           <CardComponent
             src={"/images/NewArrivals2.jpg"}
@@ -79,7 +81,7 @@ function App() {
       </div>
       <h1 className="md:text-6xl text-4xl md:mt-28 mt-14 mb-8">Best Sellers</h1>
       <div className="grid md:grid-cols-3 gap-3 mx-3">
-        <div className="md:min-h-[880px] min-h-[460px] md:border-2 border-black p-3 rounded-lg h-fit flex md:flex-col flex-row gap-3 relative">
+        <div className="md:h-[880px] h-[460px] md:border-2 border-black p-3 flex md:flex-col gap-3 relative">
           <CardComponent
             src={"/images/BestSeller1.jpg"}
             title={"Stock Pot"}
@@ -90,28 +92,21 @@ function App() {
             Our fall bakeware is back again with warm fall colors. Check out our
             fall line of bakeware from Fall colored pots to baking pans.
           </h3>
-          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-0 left-[40%] md:bottom-[2%] bottom-[5%]">
+          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
           </button>
         </div>
 
-        <div className="flex justify-center gap-3 place-items-center my-5 rotate-3">
-          <img
-            src="/public/images/Icons/pot.svg"
-            alt="pot image"
-            className="invert"
-          />
-          <h2 className="text-5xl md:hidden block">Cook to perfection!</h2>
-        </div>
+       
 
-        <div className="md:min-h-[880px] min-h-[460px] md:border-2 border-black p-3 rounded-lg h-fit flex md:flex-col flex-row-reverse md:justify-start justify-between md:gap-3 relative">
+        <div className="md:h-[880px] h-[460px] md:border-2 border-black p-3 flex md:flex-col md:justify-start justify-between md:gap-3 relative">
           <CardComponent
             src={"/images/BestSeller2.jpg"}
             title={"Stock Pot"}
             width={"w-full"}
             height={"xl:h-96 h-80"}
           />
-          <h3 className="md:text-2xl text-sm md:w-full w-48 text-start">
+          <h3 className="md:text-xl text-sm md:w-full w-48 text-start md:mb-16 overflow-scroll">
             {" "}
             The Stock Pot is a cookware that is revolutionizing the way you
             cook! With its innovative design and advanced materials. The Stock
@@ -121,31 +116,39 @@ function App() {
             the surface. Whether you're cooking for one or the whole family, the
             Stock Pot is the perfect choice!
           </h3>
-          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-0 left-[40%] md:bottom-[2%] bottom-[5%]">
+          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
           </button>
         </div>
-        <div className="md:min-h-[880px] min-h-[460px] md:border-2 border-black p-3 rounded-lg h-fit flex md:flex-col flex-row gap-3 relative">
+        <div className="md:min-h-[880px] min-h-[460px] md:border-2 border-black p-3  h-fit flex md:flex-col gap-3 relative">
           <CardComponent
             src={"/images/BestSeller3.jpg"}
             title={"Sauce Pan"}
             width={"w-full"}
             height={"xl:h-96 h-80"}
           />
-          <h3 className="md:text-2xl md:w-full w-40 text-base text-start">
+          <h3 className="md:text-2xl md:w-full w-40 text-base text-start md:mb-16 overflow-scroll">
             The Sauce Pan is the perfect cookware for making a variety of
             sauces, stews, soups, and more. Its stainless steel construction
             ensures even heat distribution for better and faster cooking. No
             matter what you're cooking, you can count on the Sauce Pan to help
             you cook like a pro.
           </h3>
-          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-0 left-[40%] md:bottom-[2%] bottom-[5%]">
+          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
           </button>
         </div>
       </div>
+       <div className="flex justify-center gap-3 place-items-center my-5 md:hidden">
+          <img
+            src="/public/images/Icons/pot.svg"
+            alt="pot image"
+            className="invert"
+          />
+          <h2 className="text-5xl">Cook to perfection!</h2>
+        </div>
       <h1 className="md:text-6xl text-4xl md:mt-28 mt-14 mb-8">Reviews</h1>
-      <div className="grid grid-cols-3">
+      <div className="grid md:grid-cols-3">
         <div className=" relative bg-[url(/images/Reviews1.jpg)] bg-cover h-[30rem]">
           <div className="top-[15%] bottom-[15%] left-[15%] right-[15%] absolute bg-black/50 p-2 flex flex-col place-content-center xl:gap-4 gap-2 text-white">
             <h2 className="xl:text-4xl text-2xl">Wok Star!</h2>
