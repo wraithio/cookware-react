@@ -5,7 +5,7 @@ import App from "./App.jsx";
 import NavbarComponent from "./components/NavbarComponent.jsx";
 // import SplashComponent from "./components/SplashComponent.jsx";
 import FooterComponent from "./components/FooterComponent.jsx";
-import Cookware from "./Cookware.jsx";
+import ShopPage from "./ShopPage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 createRoot(document.getElementById("root")).render(
@@ -14,7 +14,7 @@ createRoot(document.getElementById("root")).render(
       <NavbarComponent />
       <Routes>
         <Route path="/" element={<App />} />
-        {/* <Route path="/cookware" element={<Cookware />}/> */}
+        <Route path="/shop" element={<ShopPage />}/>
       </Routes>
       <FooterComponent />
     </BrowserRouter>

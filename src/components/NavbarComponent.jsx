@@ -6,17 +6,17 @@ const NavbarComponent = () => {
   return (
     <nav className="bg-transparent">
       <div className="flex flex-wrap items-center justify-between p-4 w-full">
-        <a href="#" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img
             src="/images/Logo.svg"
             className="h-20 ps-4"
             alt="Cookware Logo"
           />
-        </a>
+        </Link>
 
         <div className="items-center justify-between flex w-auto">
           <div className="flex gap-3">
-            <Link to="/cookware">
+            <Link>
               <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
                 COOKWARE
               </h3>

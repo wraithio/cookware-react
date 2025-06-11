@@ -1,12 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import CardComponent from "./components/CardComponent";
 import NavbarComponent from "./components/NavbarComponent";
 import SplashComponent from "./components/SplashComponent";
+import { Link } from "react-router-dom";
 
 function App() {
-  const [newArrivalpic,setNewArrivalpic] = useState("/images/NewArrivals1.jpg")
+  const [newArrivalpic, setNewArrivalpic] = useState(
+    "/images/NewArrivals1.jpg"
+  );
+  const [colorDescription, setColorDescription] = useState("Apple Cinnamon");
 
+  useEffect(() => {
+    switch (colorDescription) {
+      case "Apple Cinnamon":
+        setNewArrivalpic("/images/NewArrivals1.jpg");
+        break;
+      case "Pumpkin Spice":
+        setNewArrivalpic("/images/ORANGENewArrivals1.png");
+        break;
+      case "Autumn Bronze":
+        setNewArrivalpic("/images/GOLDNewArrivals1.png");
+        break;
+      case "Pinot Noir":
+        setNewArrivalpic("/images/BLACKNewArrivals1.png");
+        break;
+    }
+  }, [colorDescription]);
 
   return (
     <div>
@@ -55,13 +75,29 @@ function App() {
               cookware.
             </h3>
             <h3>
-              Color: <b>Apple Cinnamon</b>
+              Color: <b>{colorDescription}</b>
             </h3>
             <div className="flex">
-              <div onClick={() => setNewArrivalpic("/images/NewArrivals1.jpg")} className="circle-red cursor-pointer"></div>
-              <div onClick={() => setNewArrivalpic("/images/ORANGENewArrivals1.png")} className="circle-orange cursor-pointer"></div>
-              <div onClick={() => setNewArrivalpic("/images/GOLDNewArrivals1.png")} className="circle-yellow cursor-pointer"></div>
-              <div onClick={() => setNewArrivalpic("/images/BLACKNewArrivals1.png")} className="circle-grey cursor-pointer"></div>
+              <div
+                onClick={() => setColorDescription("Apple Cinnamon")}
+                className="circle-red cursor-pointer"
+              ></div>
+              <div
+                onClick={() =>
+                  setColorDescription("Pumpkin Spice")
+                }
+                className="circle-orange cursor-pointer"
+              ></div>
+              <div
+                onClick={() => setColorDescription("Autumn Bronze")}
+                className="circle-yellow cursor-pointer"
+              ></div>
+              <div
+                onClick={() =>
+                  setColorDescription("Pinot Noir")
+                }
+                className="circle-grey cursor-pointer"
+              ></div>
             </div>
           </div>
         </div>
@@ -92,12 +128,10 @@ function App() {
             Our fall bakeware is back again with warm fall colors. Check out our
             fall line of bakeware from Fall colored pots to baking pans.
           </h3>
-          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
+          <Link to={"/shop"} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
-          </button>
+          </Link>
         </div>
-
-       
 
         <div className="md:h-[880px] h-[460px] md:border-2 border-black p-3 flex md:flex-col md:justify-start justify-between md:gap-3 relative">
           <CardComponent
@@ -116,9 +150,9 @@ function App() {
             the surface. Whether you're cooking for one or the whole family, the
             Stock Pot is the perfect choice!
           </h3>
-          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
+           <Link to={"/shop"} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
-          </button>
+          </Link>
         </div>
         <div className="md:min-h-[880px] min-h-[460px] md:border-2 border-black p-3  h-fit flex md:flex-col gap-3 relative">
           <CardComponent
@@ -134,19 +168,19 @@ function App() {
             matter what you're cooking, you can count on the Sauce Pan to help
             you cook like a pro.
           </h3>
-          <button className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
+          <Link to={"/shop"} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
-          </button>
+          </Link>
         </div>
       </div>
-       <div className="flex justify-center gap-3 place-items-center my-5 md:hidden">
-          <img
-            src="/public/images/Icons/pot.svg"
-            alt="pot image"
-            className="invert"
-          />
-          <h2 className="text-5xl">Cook to perfection!</h2>
-        </div>
+      <div className="flex justify-center gap-3 place-items-center my-5 md:hidden">
+        <img
+          src="/public/images/Icons/pot.svg"
+          alt="pot image"
+          className="invert"
+        />
+        <h2 className="text-5xl">Cook to perfection!</h2>
+      </div>
       <h1 className="md:text-6xl text-4xl md:mt-28 mt-14 mb-8">Reviews</h1>
       <div className="grid md:grid-cols-3">
         <div className=" relative bg-[url(/images/Reviews1.jpg)] bg-cover h-[30rem]">
