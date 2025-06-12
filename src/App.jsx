@@ -154,7 +154,7 @@ function App() {
             SHOP NOW
           </Link>
         </div>
-        <div className="md:min-h-[880px] min-h-[460px] md:border-2 border-black p-3  h-fit flex md:flex-col gap-3 relative">
+        <div className="md:h-[880px] h-[460px] md:border-2 border-black p-3 flex md:flex-col gap-3 relative">
           <CardComponent
             src={"/images/BestSeller3.jpg"}
             title={"Sauce Pan"}
