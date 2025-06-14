@@ -10,6 +10,7 @@ const CookwareShop = () => {
   const [activeFilter, setActiveFilter] = useState('all');
   const [cartItems, setCartItems] = useState([]);
   const [sortBy, setSortBy] = useState('featured');
+  
 
   const products = [
     {

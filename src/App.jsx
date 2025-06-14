@@ -12,21 +12,21 @@ function App() {
   const [colorDescription, setColorDescription] = useState("Apple Cinnamon");
 
   useEffect(() => {
-    switch (colorDescription) {
-      case "Apple Cinnamon":
-        setNewArrivalpic("/images/NewArrivals1.jpg");
+    switch (newArrivalpic) {
+      case "/images/NewArrivals1.jpg":
+        setColorDescription("Apple Cinnamon");
         break;
-      case "Pumpkin Spice":
-        setNewArrivalpic("/images/ORANGENewArrivals1.png");
+      case "/images/ORANGENewArrivals1.png":
+        setColorDescription("Pumpkin Spice");
         break;
-      case "Autumn Bronze":
-        setNewArrivalpic("/images/GOLDNewArrivals1.png");
+      case "/images/GOLDNewArrivals1.png":
+        setColorDescription("Autumn Bronze");
         break;
-      case "Pinot Noir":
-        setNewArrivalpic("/images/BLACKNewArrivals1.png");
+      case "/images/BLACKNewArrivals1.png":
+        setColorDescription("Pinot Noir");
         break;
     }
-  }, [colorDescription]);
+  }, [newArrivalpic]);
 
   return (
     <div>
@@ -79,22 +79,22 @@ function App() {
             </h3>
             <div className="flex">
               <div
-                onClick={() => setColorDescription("Apple Cinnamon")}
+                onClick={() => setNewArrivalpic("/images/NewArrivals1.jpg")}
                 className="circle-red cursor-pointer"
               ></div>
               <div
                 onClick={() =>
-                  setColorDescription("Pumpkin Spice")
+                  setNewArrivalpic("/images/ORANGENewArrivals1.png")
                 }
                 className="circle-orange cursor-pointer"
               ></div>
               <div
-                onClick={() => setColorDescription("Autumn Bronze")}
+                onClick={() => setNewArrivalpic("/images/GOLDNewArrivals1.png")}
                 className="circle-yellow cursor-pointer"
               ></div>
               <div
                 onClick={() =>
-                  setColorDescription("Pinot Noir")
+                  setNewArrivalpic("/images/BLACKNewArrivals1.png")
                 }
                 className="circle-grey cursor-pointer"
               ></div>
@@ -128,7 +128,7 @@ function App() {
             Our fall bakeware is back again with warm fall colors. Check out our
             fall line of bakeware from Fall colored pots to baking pans.
           </h3>
-          <Link to={"/shop"} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
+          <Link to={`/product/professional-stock-pot`} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
           </Link>
         </div>
@@ -150,7 +150,7 @@ function App() {
             the surface. Whether you're cooking for one or the whole family, the
             Stock Pot is the perfect choice!
           </h3>
-           <Link to={"/shop"} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
+           <Link to={`/product/cast-iron-dutch-oven`} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
           </Link>
         </div>
@@ -168,7 +168,7 @@ function App() {
             matter what you're cooking, you can count on the Sauce Pan to help
             you cook like a pro.
           </h3>
-          <Link to={"/shop"} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
+          <Link to={`/product/copper-sauce-pan`} className="hover:text-white hover:bg-black w-fit text-start border-2 border-black px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]">
             SHOP NOW
           </Link>
         </div>

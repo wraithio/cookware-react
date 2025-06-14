@@ -7,6 +7,7 @@ import NavbarComponent from "./components/NavbarComponent.jsx";
 import FooterComponent from "./components/FooterComponent.jsx";
 import ShopPage from "./ShopPage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import ProductViewPage from "./ProductViewPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -14,7 +15,8 @@ createRoot(document.getElementById("root")).render(
       <NavbarComponent />
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/shop" element={<ShopPage />}/>
+        <Route path="/shop/:category" element={<ShopPage />}/>
+        <Route path="/product/:product" element={<ProductViewPage/>}/>
       </Routes>
       <FooterComponent />
     </BrowserRouter>

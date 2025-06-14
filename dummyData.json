@@ -1,0 +1,74 @@
+ {"products" : [
+    {
+      "id": 1,
+      "name": "Professional Stock Pot",
+      "description": "12-inch ceramic non-stick coating",
+      "price": 89.99,
+      "image": "/images/BestSeller1.jpg",
+      "category": "pots"
+    },
+    {
+      "id": 2,
+      "name": "Cast Iron Dutch Oven",
+      "description": "5.5-quart enameled cast iron",
+      "price": 159.99,
+      "image": "/images/BestSeller2.jpg",
+      "category": "pots"
+    },
+    {
+      "id": 3,
+      "name": "Copper Sauce Pan",
+      "description": "10-inch tri-ply construction",
+      "price": 124.99,
+      "image": "/images/BestSeller3.jpg",
+      "category": "pans"
+    },
+    {
+      "id": 4,
+      "name": "Classic Dutch Oven",
+      "description": "12-piece stainless steel set",
+      "price": 399.99,
+      "image": "/images/NewArrivals1.jpg",
+      "category": "pots"
+    },
+    {
+      "id": 5,
+      "name": "Nonstick Wok 14 Inch",
+      "description": "2-piece with glass lids",
+      "price": 79.99,
+      "image": "/images/NewArrivals2.jpg",
+      "category": "sets"
+    },
+    {
+      "id": 6,
+      "name": "Cast Iron Pot",
+      "description": "5-piece silicone and steel",
+      "price": 49.99,
+      "image": "/images/StartCooking1.jpeg",
+      "category": "pots"
+    },
+    {
+      "id": 7,
+      "name": "Carbon Steel Stock Pot",
+      "description": "14-inch traditional style",
+      "price": 69.99,
+      "image": "/images/StartCooking2.jpeg",
+      "category": "pots"
+    },
+    {
+      "id": 8,
+      "name": "Cast Iron Sauce Pan",
+      "description": "3-piece eco-friendly boards",
+      "price": 34.99,
+      "image": "/images/StartCooking3.jpeg",
+      "category": "pans"
+    },
+    {
+      "id": 9,
+      "name": "Premium Utensil Set",
+      "description": "5-piece silicone and steel",
+      "price": 34.99,
+      "image": "/images/StartCooking4.jpeg",
+      "category": "accessories"
+    }
+  ]}
