@@ -5,13 +5,14 @@ import ProductGrid from './components/ProductGrid';
 import FilterSection from './components/FilterSection';
 import Footer from './components/Footer';
 import { Link } from 'react-router-dom';
+import { useData } from './context/DataProvider';
 
 const CookwareShop = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [cartItems, setCartItems] = useState([]);
+  // const [cartItems, setCartItems] = useState([]);
   const [sortBy, setSortBy] = useState('featured');
+  const { username, setUsername, isAdmin, setIsAdmin, cartItems, setCartItems } = useData();
   
-
   const products = [
     {
       id: 1,
@@ -122,7 +123,7 @@ const CookwareShop = () => {
 
   return (
     <div className="bg-gray-50 min-h-screen">
-      <Header cartItemCount={cartItemCount} />
+      {/* <Header cartItemCount={cartItemCount} /> */}
       
       {/* Breadcrumb */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

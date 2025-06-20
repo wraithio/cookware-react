@@ -50,7 +50,7 @@ const FilterSection = ({
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="border border-gray-300 rounded-md pe-5 ps-3 py-2 text-gray-700 bg-white"
+          className="border border-gray-300 rounded-md pe-5 ps-3 py-2 text-gray-700 bg-white cursor-pointer"
         >
           <option value="featured">Sort by: Featured</option>
           <option value="price-low">Price: Low to High</option>

@@ -17,9 +17,10 @@ discount number
 isOnSale bool
 pictures string[]
 createdby number
-createdby datetime
+creatededate datetime
+createdby string
 modifiedby number
-modifiedby datetime
+modifieddate datetime
 
 details model rough draft
 
@@ -31,3 +32,19 @@ dimensions string
 weight string
 care string
 description string
+
+user model rough draft
+
+id number
+username string
+createdby datetime
+isdeleted bool
+
+review model rough draft
+
+id number
+productid number
+name string
+review string
+rating number
+createdby datetime

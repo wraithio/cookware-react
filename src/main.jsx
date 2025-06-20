@@ -8,17 +8,20 @@ import FooterComponent from "./components/FooterComponent.jsx";
 import ShopPage from "./ShopPage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductViewPage from "./ProductViewPage.jsx";
+import { DataProvider } from "./context/DataProvider.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <BrowserRouter>
-      <NavbarComponent />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/shop/:category" element={<ShopPage />}/>
-        <Route path="/product/:product" element={<ProductViewPage/>}/>
-      </Routes>
-      <FooterComponent />
-    </BrowserRouter>
-  </StrictMode>
+  <DataProvider>
+    <StrictMode>
+      <BrowserRouter>
+        <NavbarComponent />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/shop/:category" element={<ShopPage />} />
+          <Route path="/product/:product" element={<ProductViewPage />} />
+        </Routes>
+        <FooterComponent />
+      </BrowserRouter>
+    </StrictMode>
+  </DataProvider>
 );

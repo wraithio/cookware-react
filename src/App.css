@@ -142,3 +142,33 @@ input {
   background-color: #1f2937;
   color: white;
 }
+
+.animate-bounce-quick {
+  animation: bounce-quick 1s ease-out;
+}
+
+@keyframes bounce-quick {
+  0% {
+    transform: translateY(0);
+  }
+  10% {
+    transform: translateY(-30%);
+  }
+  20% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-20%);
+  }
+  40% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10%);
+  }
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
