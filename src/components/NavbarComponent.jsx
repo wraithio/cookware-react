@@ -8,8 +8,20 @@ import {
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useData } from "../context/DataProvider";
-import { KeyRoundIcon, ShoppingCartIcon, X } from "lucide-react";
-import { getUsers, login } from "../utils/DataServices";
+import {
+  CheckCircle,
+  CircleXIcon,
+  KeyRoundIcon,
+  PlusCircleIcon,
+  ShoppingCartIcon,
+  X,
+} from "lucide-react";
+import {
+  login,
+  updateLogin,
+  deactivateUser,
+  createAdmin,
+} from "../utils/DataServices";
 
 const NavbarComponent = () => {
   const {
@@ -27,6 +39,46 @@ const NavbarComponent = () => {
   const [error, setError] = useState(false);
   const [selectName, setSelectName] = useState(false);
   const [passkey, setPasskey] = useState(null);
+  const [addUser, setAddUser] = useState(false);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+  const [newUser, setNewUser] = useState("");
+
+  const formatDate = (date) => {
+    const localDateTime = new Date(date);
+    return localDateTime.toLocaleString();
+  };
+
+  const selectUser = async (adminName) => {
+    await updateLogin(adminName);
+    setUsername(adminName);
+    setIsAdmin(true);
+    setOpenMenu(false);
+  };
+
+  const removeUser = async (id) => {
+    await deactivateUser(id);
+  };
+
+  const createUser = async (newName) => {
+    const newEntry = {
+      passkey: passkey,
+      username: newName,
+    };
+    const adminNames = admins.map(
+      (admin) => admin.isActive == true && admin.username.toLowerCase()
+    );
+    if (adminNames.includes(newName.toLowerCase())) setIsDuplicate(true);
+    else {
+      await createAdmin(newEntry);
+      setIsDuplicate(false);
+      setAddUser(false);
+    }
+  };
+
+  const closeAddUser = () => {
+    setAddUser(false);
+    setIsDuplicate(false);
+  };
 
   const handleSubmit = async (code) => {
     if (isNaN(code)) {
@@ -37,7 +89,7 @@ const NavbarComponent = () => {
     if (await login(Number(code))) {
       setError(false);
       setSelectName(true);
-    }
+    } else setError(true);
   };
   return (
     // <>
@@ -86,6 +138,13 @@ const NavbarComponent = () => {
       <NavbarCollapse className="md:mb-4">
         <div className="items-center justify-between flex w-full me-6">
           <div className="flex gap-3">
+            <div
+              className={`place-items-center ${isAdmin ? "flex" : "hidden"}`}
+            >
+              <i className="text-gray-900">
+                logged in as: <b>{username}</b>
+              </i>
+            </div>
             <Link to={"/"}>
               <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
                 HOME
@@ -126,15 +185,74 @@ const NavbarComponent = () => {
                     <>
                       <div className="flex flex-col gap-2 items-center text-center">
                         <p>Select User:</p>
-                        <div className="flex gap-2">
+                        <div className="flex flex-col w-full overflow-y-scroll h-60">
                           {admins.map((admin) => (
-                            <div
-                              className={`text-black`}
-                            >
-                              {admin.username}
-                              <hr/>
+                            <div className="text-black" key={admin.id}>
+                              <div className="flex justify-between hover:bg-slate-100 cursor-pointer gap-2 p-2 my-2">
+                                <div
+                                  className="flex w-full justify-between"
+                                  onClick={() => selectUser(admin.username)}
+                                >
+                                  <p>{admin.username}</p>
+                                  <div className="flex place-items-center">
+                                    <i className="text-slate-400 text-xs">
+                                      Last login: {formatDate(admin.lastLogin)}
+                                    </i>
+                                  </div>
+                                </div>
+                                <X
+                                  className="hover:text-red-600"
+                                  onClick={() => removeUser(admin.id)}
+                                />
+                              </div>
+                              <hr />
                             </div>
                           ))}
+
+                          <div
+                            className={`flex gap-1 place-items-center cursor-pointer hover:text-slate-500 w-fit my-2 ${
+                              addUser ? "hidden" : ""
+                            }`}
+                            onClick={() => setAddUser(true)}
+                          >
+                            <PlusCircleIcon />
+                            <i>add a new user</i>
+                          </div>
+                          {addUser && (
+                            <div className="flex justify-between place-items-center gap-2 p-2 my-2">
+                              <input
+                                type="text"
+                                placeholder="new user"
+                                maxLength={15}
+                                className={`p-0 px-1 ${
+                                  isDuplicate
+                                    ? " outline-red-600 outline-1 outline animate-bounce-quick"
+                                    : ""
+                                }`}
+                                onChange={(e) => setNewUser(e.target.value)}
+                              />
+                              {isDuplicate && (
+                                <i className="text-red-600 text-xs">
+                                  name already exists...
+                                </i>
+                              )}
+                              <div className="flex gap-1 place-items-center">
+                                <CheckCircle
+                                  id="add user"
+                                  className="cursor-pointer hover:text-slate-500"
+                                  onClick={() => createUser(newUser)}
+                                />
+                                <CircleXIcon
+                                  id="close"
+                                  className="cursor-pointer hover:text-slate-500"
+                                  onClick={() => closeAddUser()}
+                                />
+                              </div>
+                            </div>
+                          )}
+                          {/* {isDuplicate && (
+                                <i className="text-red-600">name already exists...</i>
+                              )} */}
                         </div>
                       </div>
                     </>
@@ -149,6 +267,7 @@ const NavbarComponent = () => {
                       <div className="flex flex-col gap-2 items-center text-center">
                         <p>Enter the passkey:</p>
                         <input
+                        maxLength={4}
                           type="text"
                           onChange={(e) => setPasskey(e.target.value)}
                           className={`rounded-md text-center ${

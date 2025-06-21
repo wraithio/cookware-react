@@ -24,7 +24,8 @@ export const DataProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchUsers = async()  =>{
-        setAdmins(await getUsers())
+        const allAdmins = await getUsers()
+        setAdmins(allAdmins.filter(admin => admin.isActive == true))
     }
 
     fetchUsers()

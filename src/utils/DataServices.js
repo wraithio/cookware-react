@@ -34,6 +34,29 @@ export const login = async (passkey) => {
   }
 };
 
+export const createAdmin = async (entry) => {
+  console.log(entry)
+  try {
+    const response = await fetch(`${api}Admin/CreateAdmin`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entry)
+    });
+
+    if (!response.ok) {
+      throw new Error("Creation failed");
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error("Error during creation:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
 export const getUsers = async () => {
   try {
     const response = await fetch(`${api}Admin/GetAllAdmins`, {
@@ -53,4 +76,46 @@ export const getUsers = async () => {
     console.error("Error fetching users:", error);
     throw error; // Propagate the error for further handling
   }
-}
+};
+
+export const updateLogin = async (username) => {
+  try {
+    const response = await fetch(`${api}Admin/UpdateLoginDate/${username}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update login date");
+    }
+
+    const data = await response.json();
+    return data; // Return the list of users
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
+export const deactivateUser = async (id) => {
+  try {
+    const response = await fetch(`${api}Admin/DeactivateAdmin/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to deactivate user");
+    }
+
+    const data = await response.json();
+    return data; // Return the list of users
+  } catch (error) {
+    console.error("Error updating user:", error);
+    throw error; // Propagate the error for further handling
+  }
+};

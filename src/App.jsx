@@ -175,7 +175,7 @@ function App() {
       </div>
       <div className="flex justify-center gap-3 place-items-center my-5 md:hidden">
         <img
-          src="/public/images/Icons/pot.svg"
+          src="/images/Icons/pot.svg"
           alt="pot image"
           className="invert"
         />
