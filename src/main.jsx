@@ -9,6 +9,7 @@ import ShopPage from "./ShopPage.jsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductViewPage from "./ProductViewPage.jsx";
 import { DataProvider } from "./context/DataProvider.jsx";
+import DashboardPage from "./DashboardPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <DataProvider>
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")).render(
           <Route path="/" element={<App />} />
           <Route path="/shop/:category" element={<ShopPage />} />
           <Route path="/product/:product" element={<ProductViewPage />} />
+          <Route path="/dashboard" element={<DashboardPage />} />
         </Routes>
         <FooterComponent />
       </BrowserRouter>

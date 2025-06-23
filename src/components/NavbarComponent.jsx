@@ -5,8 +5,8 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { useData } from "../context/DataProvider";
 import {
   CheckCircle,
@@ -35,6 +35,8 @@ const NavbarComponent = () => {
     setCartItems,
   } = useData();
 
+  const route = useLocation();
+
   const [openMenu, setOpenMenu] = useState(false);
   const [error, setError] = useState(false);
   const [selectName, setSelectName] = useState(false);
@@ -42,6 +44,10 @@ const NavbarComponent = () => {
   const [addUser, setAddUser] = useState(false);
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [newUser, setNewUser] = useState("");
+
+  useEffect(() => {
+    if (route.pathname == "/dashboard" && !isAdmin) setOpenMenu(true);
+  });
 
   const formatDate = (date) => {
     const localDateTime = new Date(date);
@@ -164,6 +170,13 @@ const NavbarComponent = () => {
             <h3 className="hover:cursor-pointer text-orange-600 text-lg ">
               SALE
             </h3>
+            {isAdmin && (
+              <Link to={"/dashboard"}>
+                <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
+                  DASHBOARD
+                </h3>
+              </Link>
+            )}
             <button className="text-gray-600 hover:text-gray-900 relative">
               <ShoppingCartIcon className="w-6 h-6" />
               {cartItems > 0 && (
@@ -200,6 +213,7 @@ const NavbarComponent = () => {
                                     </i>
                                   </div>
                                 </div>
+
                                 <X
                                   className="hover:text-red-600"
                                   onClick={() => removeUser(admin.id)}
@@ -258,16 +272,25 @@ const NavbarComponent = () => {
                     </>
                   ) : (
                     <>
-                      <button
-                        onClick={() => setOpenMenu(false)}
-                        className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
-                      >
-                        <X className="w-5 h-5 text-gray-500" />
-                      </button>
+                      {route.pathname == "/dashboard" ? (
+                        <Link to="/">
+                          <p className="my-3 absolute top-4 left-4 text-blue-500 hover:text-blue-400 underline cursor-pointer">
+                            &lt;- Back To Home Page
+                          </p>
+                        </Link>
+                      ) : (
+                        <button
+                          onClick={() => setOpenMenu(false)}
+                          className="absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
+                        >
+                          <X className="w-5 h-5 text-gray-500" />
+                        </button>
+                      )}
+
                       <div className="flex flex-col gap-2 items-center text-center">
                         <p>Enter the passkey:</p>
                         <input
-                        maxLength={4}
+                          maxLength={4}
                           type="text"
                           onChange={(e) => setPasskey(e.target.value)}
                           className={`rounded-md text-center ${
