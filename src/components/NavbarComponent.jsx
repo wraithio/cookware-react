@@ -46,7 +46,7 @@ const NavbarComponent = () => {
   const [newUser, setNewUser] = useState("");
 
   useEffect(() => {
-    if (route.pathname == "/dashboard" && !isAdmin) setOpenMenu(true);
+    if (route.pathname.includes("/dashboard") && !isAdmin) setOpenMenu(true);
   });
 
   const formatDate = (date) => {
@@ -272,10 +272,10 @@ const NavbarComponent = () => {
                     </>
                   ) : (
                     <>
-                      {route.pathname == "/dashboard" ? (
-                        <Link to="/">
-                          <p className="my-3 absolute top-4 left-4 text-blue-500 hover:text-blue-400 underline cursor-pointer">
-                            &lt;- Back To Home Page
+                      {route.pathname.includes("/dashboard") ? (
+                        <Link to="/" onClick={() => setOpenMenu(false)}>
+                          <p className="my-1 text-start text-blue-500 hover:text-blue-400 underline cursor-pointer">
+                            &lt;-- Back To Home Page
                           </p>
                         </Link>
                       ) : (
