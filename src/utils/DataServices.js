@@ -2,6 +2,8 @@
 
 const api =
   "https://cookwareinterface-drgnfkhdevbvd6gw.westus-01.azurewebsites.net/";
+  const blobURL = "https://aaronsblob123.blob.core.windows.net/aaronsblob"
+
 
 export const createSlug = (name) => {
   return name
@@ -35,7 +37,6 @@ export const login = async (passkey) => {
 };
 
 export const createAdmin = async (entry) => {
-  console.log(entry)
   try {
     const response = await fetch(`${api}Admin/CreateAdmin`, {
       method: "POST",
@@ -119,3 +120,86 @@ export const deactivateUser = async (id) => {
     throw error; // Propagate the error for further handling
   }
 };
+
+export const addProduct = async (entry) => {
+  console.log(entry)
+  try {
+    const response = await fetch(`${api}Product/AddProduct`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entry)
+    });
+
+    if (!response.ok) {
+      throw new Error("Product Creation failed");
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error("Error during product creation:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
+export const addProductDetails = async (entry) => {
+  console.log(entry)
+  try {
+    const response = await fetch(`${api}Details/AddDetails`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(entry)
+    });
+
+    if (!response.ok) {
+      throw new Error("Details Creation failed");
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error("Error during detail creation:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
+export const getProductByName = async (product) => {
+  try {
+    const response = await fetch(`${api}Product/GetProductByName/${product}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch product");
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error("Error during fetching product:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
+export const blobUpload = async (params)=> {
+        const response = await fetch(`${api}Blob/Upload`, {
+            method: 'POST',
+            // The browser automatically sets the correct Content-Type header to multipart/form-data
+            body: params, //becuase params is FormData we do NOT need to stringify it
+        });
+
+        if (response.ok) {
+            // Extract the filename from FormData
+            const fileName = params.get('fileName');
+            
+            // Construct the Blob Storage URL
+            const uploadedFileUrl = `${blobURL}/${fileName}`;
+            
+            return uploadedFileUrl;
+        } else {
+            console.log('Failed to upload file.');
+            return null;
+        }
+      }

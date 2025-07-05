@@ -5,7 +5,7 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "flowbite-react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useData } from "../context/DataProvider";
 import {
@@ -13,7 +13,9 @@ import {
   CircleXIcon,
   KeyRoundIcon,
   PlusCircleIcon,
+  Settings,
   ShoppingCartIcon,
+  Trash2Icon,
   X,
 } from "lucide-react";
 import {
@@ -25,6 +27,8 @@ import {
 
 const NavbarComponent = () => {
   const {
+    userId,
+    setUserId,
     username,
     setUsername,
     admins,
@@ -46,7 +50,7 @@ const NavbarComponent = () => {
   const [newUser, setNewUser] = useState("");
 
   useEffect(() => {
-    if (route.pathname.includes("/dashboard") && !isAdmin) setOpenMenu(true);
+    if (route.pathname.includes("/dashboard") && isAdmin == false) setOpenMenu(true);
   });
 
   const formatDate = (date) => {
@@ -54,9 +58,10 @@ const NavbarComponent = () => {
     return localDateTime.toLocaleString();
   };
 
-  const selectUser = async (adminName) => {
+  const selectUser = async (adminId, adminName) => {
     await updateLogin(adminName);
     setUsername(adminName);
+    setUserId(adminId);
     setIsAdmin(true);
     setOpenMenu(false);
   };
@@ -91,12 +96,18 @@ const NavbarComponent = () => {
       setError(true);
       return;
     }
-    console.log(code);
     if (await login(Number(code))) {
       setError(false);
       setSelectName(true);
     } else setError(true);
   };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter") {
+      handleSubmit(passkey);
+    }
+  };
+
   return (
     // <>
     //   <nav className="bg-transparent">
@@ -170,13 +181,7 @@ const NavbarComponent = () => {
             <h3 className="hover:cursor-pointer text-orange-600 text-lg ">
               SALE
             </h3>
-            {isAdmin && (
-              <Link to={"/dashboard"}>
-                <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
-                  DASHBOARD
-                </h3>
-              </Link>
-            )}
+
             <button className="text-gray-600 hover:text-gray-900 relative">
               <ShoppingCartIcon className="w-6 h-6" />
               {cartItems > 0 && (
@@ -191,6 +196,16 @@ const NavbarComponent = () => {
             >
               <KeyRoundIcon className="w-6 h-6" />
             </button>
+            {isAdmin && (
+              <Link to={"/dashboard"}>
+                <button
+                  className="text-gray-600 hover:text-gray-900 relative"
+                  onClick={() => setOpenMenu(true)}
+                >
+                  <Settings className="w-6 h-6" />
+                </button>
+              </Link>
+            )}
             {openMenu && (
               <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
                 <div className="bg-white rounded-2xl p-8 max-w-md w-full animate-in zoom-in-95 relative">
@@ -204,7 +219,9 @@ const NavbarComponent = () => {
                               <div className="flex justify-between hover:bg-slate-100 cursor-pointer gap-2 p-2 my-2">
                                 <div
                                   className="flex w-full justify-between"
-                                  onClick={() => selectUser(admin.username)}
+                                  onClick={() =>
+                                    selectUser(admin.id, admin.username)
+                                  }
                                 >
                                   <p>{admin.username}</p>
                                   <div className="flex place-items-center">
@@ -214,7 +231,7 @@ const NavbarComponent = () => {
                                   </div>
                                 </div>
 
-                                <X
+                                <Trash2Icon
                                   className="hover:text-red-600"
                                   onClick={() => removeUser(admin.id)}
                                 />
@@ -293,6 +310,7 @@ const NavbarComponent = () => {
                           maxLength={4}
                           type="text"
                           onChange={(e) => setPasskey(e.target.value)}
+                          onKeyDown={handleKeyDown}
                           className={`rounded-md text-center ${
                             error ? "border-red-500 animate-bounce-quick" : ""
                           }`}

@@ -16,6 +16,7 @@ export const useData = () => {
 
 // Create the provider component
 export const DataProvider = ({ children }) => {
+  const [userId, setUserId] = useState(null);
   const [username, setUsername] = useState(null);
   const [theme, setTheme] = useState('light');
   const [isAdmin, setIsAdmin] = useState(false);
@@ -32,6 +33,8 @@ export const DataProvider = ({ children }) => {
   })
 
   const value = {
+    userId,
+    setUserId,
     username,
     setUsername,
     admins,
