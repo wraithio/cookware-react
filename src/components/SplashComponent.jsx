@@ -14,13 +14,19 @@ import { Reveal1 } from "./animations/Reveal1";
 import { Reveal2 } from "./animations/Reveal2";
 import { Reveal3 } from "./animations/Reveal3";
 import { Reveal4 } from "./animations/Reveal4";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/autoplay";
 
 const SplashComponent = () => {
   return (
     <div>
       {/* <div className="w-full h-full bg-white/1 backdrop-blur-sm"></div> */}
       <div className="relative text-start pt-[10%]">
-        <h1 className="text-[15vw] text-5xl">COOKWARE</h1>
+        <Reveal1>
+          <h1 className="text-[15vw] text-5xl">COOKWARE</h1>
+        </Reveal1>
         <div className="flex justify-between mx-[5vw]">
           <section className="flex gap-3">
             <div className="flex gap-2 flex-col place-items-center">
@@ -39,7 +45,11 @@ const SplashComponent = () => {
                 />
               </Reveal3>
               <Reveal2>
-                <Shell size={30} color="#000000" className="me-4 animate-[pulse_1.5s_linear_infinite]" />
+                <Shell
+                  size={30}
+                  color="#000000"
+                  className="me-4 animate-[pulse_1.5s_linear_infinite]"
+                />
               </Reveal2>
               <Reveal1>
                 <Shell
@@ -57,6 +67,7 @@ const SplashComponent = () => {
           </section>
           <div className="flex gap-2">
             <Ham className="animate-bounce" size={28} />
+
             <Carrot
               className="animate-[bounce_1.15s_linear_infinite]"
               size={28}
@@ -73,12 +84,28 @@ const SplashComponent = () => {
         </div>
         <div className="triangle-right absolute top-full z-20"></div>
       </div>
-      <div className="bg-[url(/images/hero.jpg)] h-[70vh] bg-center bg-cover relative">
-        <div className=" text-white py-6 text-2xl">
-          <div className="triangle-left absolute bottom-0"></div>
-        </div>
-
-        <a href="/shop/all" className="md:animate-none animate-bounce absolute z-20 text-white bottom-[5vw] right-[5vw] rounded-full p-4 flex flex-col justify-center bg-green-800 aspect-square place-items-center text-center shadow-2xl hover:scale-105 cursor-pointer">
+      <div className="h-screen relative overflow-hidden">
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={1}
+          onSlideChange={() => console.log(1)}
+          onSwiper={(swiper) => console.log(swiper)}
+           modules={[Autoplay]}
+          autoplay={{
+            delay: 3000, // Delay in milliseconds between slides
+            disableOnInteraction: false, // Continue autoplay after user interaction
+          }}>
+          <SwiperSlide><img src="/images/hero.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
+          <SwiperSlide><img src="/images/BestSeller2.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
+          <SwiperSlide><img src="/images/BestSeller3.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
+          <SwiperSlide><img src="/images/NewArrivals2.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
+        </Swiper>
+        {/* <img src="/images/hero.jpg" alt="hero image" /> */}
+        <div className="triangle-left absolute bottom-0 z-40"></div>
+        <a
+          href="/shop/all"
+          className="md:animate-none animate-bounce absolute z-40 text-white bottom-[5vw] right-[5vw] rounded-full p-4 flex flex-col justify-center bg-green-800 aspect-square place-items-center text-center shadow-2xl hover:scale-105 cursor-pointer"
+        >
           <h2>
             <b>PROMOTION</b>
           </h2>

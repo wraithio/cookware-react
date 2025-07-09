@@ -29,7 +29,11 @@ export const DataProvider = ({ children }) => {
         setAdmins(allAdmins.filter(admin => admin.isActive == true))
     }
 
-    fetchUsers()
+    if (admins.length != 0)
+      {
+        console.log(9)
+        fetchUsers()
+      }
   })
 
   const value = {
