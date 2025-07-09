@@ -40,7 +40,6 @@
 .read-the-docs {
   color: #888;
 }
-
 @font-face {
   font-family: "Roboto";
   src: url(/src/assets/fonts/Roboto-Regular.ttf);
@@ -57,8 +56,16 @@
   font-family: "Roboto-Medium";
   src: url(/src/assets/fonts/Roboto-Medium.ttf);
 }
+@font-face {
+  font-family: "Quicksand";
+  src: url(/src/assets/fonts/Quicksand-VariableFont_wght.ttf);
+}
+@font-face {
+  font-family: "Josefin";
+  src: url(/src/assets/fonts/JosefinSans-VariableFont_wght.ttf);
+}
 body {
-  font-family: "Roboto", Arial, Helvetica, sans-serif;
+  font-family: "Quicksand", Arial, Helvetica, sans-serif;
   color: #292828;
   background-color: #ededed;
 }
@@ -70,7 +77,7 @@ body {
 
 h1,
 h2 {
-  font-family: "Roboto-Bold", Arial, Helvetica, sans-serif;
+  font-family: "Josefin", Arial, Helvetica, sans-serif;
 }
 
 .row {
@@ -179,3 +186,19 @@ input::-webkit-outer-spin-button {
     appearance: textfield;
     -moz-appearance: textfield;
 }
+
+.triangle-right {
+  min-width: 0;
+  height: 0;
+  border-left: 100vw solid #ededed;
+  border-bottom: 150px solid transparent;
+}
+
+.triangle-left {
+  min-width: 0;
+  height: 0;
+  border-right: 100vw solid #ededed;
+  border-top: 150px solid transparent;
+}
+
+/* #ededed */

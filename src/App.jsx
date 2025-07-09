@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import CardComponent from "./components/CardComponent";
-import NavbarComponent from "./components/NavbarComponent";
 import SplashComponent from "./components/SplashComponent";
 import { Link } from "react-router-dom";
 

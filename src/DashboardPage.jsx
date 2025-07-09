@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useData } from "./context/DataProvider";
 import { Link } from "react-router-dom";
+import { KeyIcon, KeyRoundIcon } from "lucide-react";
 
 const DashboardPage = () => {
   const {
@@ -17,8 +18,9 @@ const DashboardPage = () => {
   return (
     <>
       {!isAdmin ? (
-        <div className="min-h-screen flex place-items-center justify-center">
-          <p>sign in to continue:</p>
+        <div className="min-h-screen flex place-items-center flex-row gap-2 justify-center">
+          <p>sign in to continue</p>
+          <KeyRoundIcon/>
         </div>
       ) : (
         <div>

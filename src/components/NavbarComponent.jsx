@@ -49,9 +49,10 @@ const NavbarComponent = () => {
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [newUser, setNewUser] = useState("");
 
-  useEffect(() => {
-    if (route.pathname.includes("/dashboard") && isAdmin == false) setOpenMenu(true);
-  });
+  // useEffect(() => {
+  //   setOpenMenu(false);
+  //   if (route.pathname.includes("/dashboard")) setOpenMenu(true);
+  // }, [route.pathname]);
 
   const formatDate = (date) => {
     const localDateTime = new Date(date);
@@ -149,7 +150,11 @@ const NavbarComponent = () => {
 
     <Navbar className="bg-transparent" fluid rounded>
       <NavbarBrand>
-        <img src="/images/Logo.svg" className="h-16 ps-4" alt="Cookware Logo" />
+        <img
+          src="/images/Logo.svg"
+          className={`h-16 ps-4 ${route.pathname == "/" ? "hidden" : ""}`}
+          alt="Cookware Logo"
+        />
       </NavbarBrand>
       <NavbarToggle />
       <NavbarCollapse className="md:mb-4">
@@ -169,7 +174,7 @@ const NavbarComponent = () => {
             </Link>
             <Link to={`/shop/all`}>
               <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
-                COOKWARE
+                SHOP
               </h3>
             </Link>
             {/* <h3 className="hover:cursor-pointer text-gray-900 hover:text-orange-600 text-lg">
@@ -207,7 +212,7 @@ const NavbarComponent = () => {
               </Link>
             )}
             {openMenu && (
-              <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+              <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm ">
                 <div className="bg-white rounded-2xl p-8 max-w-md w-full animate-in zoom-in-95 relative">
                   {selectName ? (
                     <>
