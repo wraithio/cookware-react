@@ -23,6 +23,7 @@ import {
   updateLogin,
   deactivateUser,
   createAdmin,
+  getUsers,
 } from "../utils/DataServices";
 
 const NavbarComponent = () => {
@@ -49,10 +50,9 @@ const NavbarComponent = () => {
   const [isDuplicate, setIsDuplicate] = useState(false);
   const [newUser, setNewUser] = useState("");
 
-  // useEffect(() => {
-  //   setOpenMenu(false);
-  //   if (route.pathname.includes("/dashboard")) setOpenMenu(true);
-  // }, [route.pathname]);
+  useEffect(() => {
+    if (route.pathname.includes("/dashboard") && !isAdmin) setOpenMenu(true);
+  }, [route.pathname]);
 
   const formatDate = (date) => {
     const localDateTime = new Date(date);
@@ -99,6 +99,14 @@ const NavbarComponent = () => {
     }
     if (await login(Number(code))) {
       setError(false);
+      const fetchUsers = async () => {
+        const allAdmins = await getUsers();
+        setAdmins(allAdmins.filter((admin) => admin.isActive == true));
+      };
+      if (admins.length == 0) {
+        console.log("Fetching Admins...");
+        fetchUsers();
+      }
       setSelectName(true);
     } else setError(true);
   };
@@ -203,10 +211,7 @@ const NavbarComponent = () => {
             </button>
             {isAdmin && (
               <Link to={"/dashboard"}>
-                <button
-                  className="text-gray-600 hover:text-gray-900 relative"
-                  onClick={() => setOpenMenu(true)}
-                >
+                <button className="text-gray-600 hover:text-gray-900 relative">
                   <Settings className="w-6 h-6" />
                 </button>
               </Link>

@@ -34,7 +34,7 @@ const ProductCard = ({ product, onAddToCart }) => {
     >
       <div className="aspect-square bg-gray-100 relative group">
         <img 
-          src={product.image} 
+          src={product.pictures[0]} 
           alt={product.name}
           className="w-full h-full object-cover"
         />
@@ -51,7 +51,6 @@ const ProductCard = ({ product, onAddToCart }) => {
             Quick View
           </button>
           
-          {/* Alternative: If you want to use search params instead of routing */}
           {/* 
           <button 
             onClick={handleQuickView}
@@ -66,7 +65,7 @@ const ProductCard = ({ product, onAddToCart }) => {
       </div>
       <div className="p-4">
         <h3 className="font-semibold text-gray-900 mb-2">{product.name}</h3>
-        <p className="text-gray-600 text-sm mb-3">{product.description}</p>
+        <p className="text-gray-600 text-sm mb-3">{product.shortDescription}</p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold text-gray-900">
             ${product.price.toFixed(2)}

@@ -9,40 +9,49 @@ import {
   Shield,
   RotateCcw,
 } from "lucide-react";
-import { createSlug } from "./utils/DataServices";
+import {
+  createSlug,
+  getDetailsbyId,
+  getProductByName,
+} from "./utils/DataServices";
 import { Link, useParams } from "react-router-dom";
+import LoadingComponent from "./components/LoadingComponent";
+import { button, div } from "motion/react-client";
 
 const ProductViewPage = () => {
   const { product } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [productObj, setProductObj] = useState({});
+  const [productDet, setProductDet] = useState({});
   const [similarProductObj, setSimilarProductObj] = useState([{}]);
   const [selectedImage, setSelectedImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
-
-  console.log("Product name from params:", product);
+  const [colorName, setColorName] = useState("");
 
   useEffect(() => {
     const fetchProduct = async (productSlug) => {
       try {
         setLoading(true);
-        const response = await fetch("/dummyData.json");
-        const data = await response.json();
-        console.log("All products:", data.products);
+        console.log("Product name from params:", product);
+        // const response = await fetch("/dummyData.json");
+        // const data = await response.json();
+        // console.log("All products:", data.products);
 
-        const foundProduct = data.products.find(
-          (p) => createSlug(p.name) === productSlug
-        );
-        const foundSimilars = data.products.filter(
-          (product) => product.category == foundProduct.category
-        );
+        // const foundProduct = data.products.find(
+        //   (p) => createSlug(p.name) === productSlug
+        // );
+        // const foundSimilars = data.products.filter(
+        //   (product) => product.category == foundProduct.category
+        // );
 
-        console.log("Found product:", foundProduct);
-        console.log("Found similars:", foundSimilars);
-
+        // console.log("Found product:", foundProduct);
+        // console.log("Found similars:", foundSimilars);\
+        const foundProduct = await getProductByName(productSlug);
         if (foundProduct) {
           setProductObj(foundProduct);
+          setProductDet(await getDetailsbyId(foundProduct.id));
+          setColorName(foundProduct.colors[0])
         } else {
           console.error("Product not found for slug:", productSlug);
           // Handle product not found case
@@ -55,19 +64,19 @@ const ProductViewPage = () => {
           });
         }
 
-        if (foundSimilars.length !== 0) {
-          setSimilarProductObj(foundSimilars);
-        } else {
-          console.error("Similar products were not found for:", productSlug);
-          // Handle no similars found case
-          setProductObj({
-            name: "No Similar Posts",
-            description: "",
-            price: null,
-            image: null,
-            category: "unknown",
-          });
-        }
+        // if (foundSimilars.length !== 0) {
+        //   setSimilarProductObj(foundSimilars);
+        // } else {
+        //   console.error("Similar products were not found for:", productSlug);
+        //   // Handle no similars found case
+        //   setProductObj({
+        //     name: "No Similar Posts",
+        //     description: "",
+        //     price: null,
+        //     image: null,
+        //     category: "unknown",
+        //   });
+        // }
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -76,17 +85,9 @@ const ProductViewPage = () => {
     };
 
     if (product) {
-      fetchProduct(product);
+      fetchProduct("Copper Sauce Pan");
     }
   }, [product]); // Added product as dependency
-
-  // Mock additional product images
-  const productImages = [
-    productObj.image || "/images/placeholder.jpg",
-    "/images/dutch-oven-2.jpg",
-    "/images/dutch-oven-3.jpg",
-    "/images/dutch-oven-4.jpg",
-  ];
 
   const incrementQuantity = () => setQuantity((prev) => prev + 1);
   const decrementQuantity = () => setQuantity((prev) => Math.max(1, prev - 1));
@@ -94,12 +95,7 @@ const ProductViewPage = () => {
   // Show loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading product...</p>
-        </div>
-      </div>
+      <LoadingComponent title={`Loading ${productObj.name}...`}/>
     );
   }
 
@@ -132,7 +128,7 @@ const ProductViewPage = () => {
             {/* Main Image */}
             <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
               <img
-                src={productImages[selectedImage]}
+                src={productObj.pictures[0]}
                 alt={productObj.name}
                 className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
               />
@@ -140,7 +136,7 @@ const ProductViewPage = () => {
 
             {/* Thumbnail Images */}
             <div className="grid grid-cols-4 gap-3">
-              {productImages.map((img, index) => (
+              {productObj.pictures.map((img, index) => (
                 <button
                   key={index}
                   onClick={() => setSelectedImage(index)}
@@ -161,7 +157,7 @@ const ProductViewPage = () => {
           </div>
           {/* Similar Products */}
           <div className="lg:row-start-2 row-start-4">
-            {similarProductObj.length !== 0 && (
+            {/* {similarProductObj.length !== 0 && (
               <div className="flex flex-col gap-2">
                 <h3 className="font-medium text-gray-900">Similar Products</h3>
                 <div className="flex justify-center">
@@ -187,7 +183,7 @@ const ProductViewPage = () => {
                   </div>
                 </div>
               </div>
-            )}
+            )} */}
           </div>
 
           {/* Product Details */}
@@ -197,7 +193,7 @@ const ProductViewPage = () => {
                 {productObj.name}
               </h1>
               <p className="text-lg text-gray-600 mb-4">
-                {productObj.description}
+                {productObj.shortDescription}
               </p>
 
               {/* Rating */}
@@ -210,7 +206,7 @@ const ProductViewPage = () => {
                     />
                   ))}
                 </div>
-                <span className="text-sm text-gray-600">(127 reviews)</span>
+                <span className="text-sm text-gray-600">(0 reviews)</span>
               </div>
             </div>
 
@@ -218,27 +214,42 @@ const ProductViewPage = () => {
             <div className="border-t border-b border-gray-200 py-6">
               <div className="flex items-center space-x-4">
                 <span className="text-3xl font-bold text-gray-900">
-                  ${productObj.price}
+                  $
+                  {productObj.price -
+                    (productObj.price * (productObj.discount / 100)).toFixed(2)}
                 </span>
                 <span className="text-lg text-gray-500 line-through">
-                  $499.99
+                  ${productObj.price}
                 </span>
                 <span className="px-3 py-1 bg-red-100 text-red-800 text-sm font-medium rounded-full">
-                  20% OFF
+                  {productObj.discount}% OFF
                 </span>
               </div>
-              <p className="text-sm text-gray-600 mt-2">
-                Free shipping on orders over $75
+              <p className="text-sm text-start text-gray-600 mt-2">
+                Free shipping on orders over $175
               </p>
             </div>
 
             {/* Quantity and Add to Cart */}
             <div className="space-y-4">
               <div>
+                 <label className="block text-sm font-medium text-gray-900 mb-2">
+                  Color: {colorName}
+                </label>
+                <div className="flex">
+                  {productObj.colorHexCodes.map((color,idx) => 
+                    
+                    <div key={idx} className={`w-12 h-12 rounded-md bg-[${color}] cursor-pointer relative bg-[#76727e]`} onClick={() => setColorName(productObj.colors[idx])}>
+                      {colorName == productObj.colors[idx] &&<div className="absolute w-12 h-12 rounded-md bg-transparent border-4 border-slate-950"></div>}
+                    </div>
+                  )}
+                </div>
+              </div>
+              <div>
                 <label className="block text-sm font-medium text-gray-900 mb-2">
                   Quantity
                 </label>
-                <div className="flex items-center space-x-3">
+                <div className="flex justify-center items-center space-x-3">
                   <button
                     onClick={decrementQuantity}
                     className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-md hover:bg-gray-50"
@@ -282,7 +293,7 @@ const ProductViewPage = () => {
             </div>
 
             {/* Features */}
-            <div className="space-y-4 pt-6 border-t border-gray-200">
+            <div className="space-y-4 pt-6 border-t h-fit border-gray-200">
               <div className="flex items-center space-x-3">
                 <Truck className="w-5 h-5 text-gray-600" />
                 <span className="text-sm text-gray-600">
@@ -307,22 +318,23 @@ const ProductViewPage = () => {
               <h3 className="font-medium text-gray-900">Product Details</h3>
               <div className="space-y-2 text-sm text-gray-600">
                 <p>
-                  <span className="font-medium">Material:</span> Premium
-                  stainless steel
+                  <span className="font-medium">Material:</span>{" "}
+                  {productDet.material}
                 </p>
                 <p>
-                  <span className="font-medium">Capacity:</span> 5.5 quarts
+                  <span className="font-medium">Capacity:</span>{" "}
+                  {productDet.capacity}
                 </p>
                 <p>
-                  <span className="font-medium">Dimensions:</span> 10.5"
-                  diameter x 4" height
+                  <span className="font-medium">Dimensions:</span>{" "}
+                  {productDet.dimensions}
                 </p>
                 <p>
-                  <span className="font-medium">Weight:</span> 8.5 lbs
+                  <span className="font-medium">Weight:</span>{" "}
+                  {productDet.weight}
                 </p>
                 <p>
-                  <span className="font-medium">Care:</span> Dishwasher safe,
-                  oven safe up to 500°F
+                  <span className="font-medium">Care:</span> {productDet.care}
                 </p>
               </div>
             </div>
@@ -331,24 +343,7 @@ const ProductViewPage = () => {
             <div className="space-y-4 pt-6 border-t border-gray-200">
               <h3 className="font-medium text-gray-900">Description</h3>
               <div className="text-sm text-gray-600 space-y-3">
-                <p>
-                  Our Classic Dutch Oven is the perfect centerpiece for your
-                  kitchen. Crafted from premium stainless steel with superior
-                  heat retention and distribution, this versatile cookware is
-                  ideal for braising, roasting, baking, and slow cooking.
-                </p>
-                <p>
-                  The heavy-duty construction ensures even heating while the
-                  tight-fitting lid locks in moisture and flavor. Whether you're
-                  making a hearty stew, fresh bread, or a perfect roast, this
-                  Dutch oven delivers professional results every time.
-                </p>
-                <p>
-                  Designed for both stovetop and oven use, this piece
-                  transitions seamlessly from kitchen to table with its elegant
-                  design. The durable finish resists scratches and stains,
-                  making cleanup effortless.
-                </p>
+                <p>{productDet.description}</p>
               </div>
             </div>
           </div>

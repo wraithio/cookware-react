@@ -84,27 +84,52 @@ const SplashComponent = () => {
         </div>
         <div className="triangle-right absolute top-full z-20"></div>
       </div>
-      <div className="h-screen relative overflow-hidden">
+      <div className="h-fit relative overflow-hidden">
         <Swiper
           spaceBetween={0}
           slidesPerView={1}
-          onSlideChange={() => console.log(1)}
+          onSlideChange={() => console.log("next slide")}
           onSwiper={(swiper) => console.log(swiper)}
-           modules={[Autoplay]}
+          modules={[Autoplay]}
           autoplay={{
             delay: 3000, // Delay in milliseconds between slides
             disableOnInteraction: false, // Continue autoplay after user interaction
-          }}>
-          <SwiperSlide><img src="/images/hero.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
-          <SwiperSlide><img src="/images/BestSeller2.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
-          <SwiperSlide><img src="/images/BestSeller3.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
-          <SwiperSlide><img src="/images/NewArrivals2.jpg" alt="hero image" className="w-full h-full"/></SwiperSlide>
+          }}
+        >
+          <SwiperSlide>
+            <img
+              src="/images/Slide1.webp"
+              alt="hero image"
+              className="w-full h-full"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="/images/Slide2.webp"
+              alt="hero image"
+              className="w-full h-full"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="/images/Slide3.webp"
+              alt="hero image"
+              className="w-full h-full"
+            />
+          </SwiperSlide>
+          <SwiperSlide>
+            <img
+              src="/images/Slide4.webp"
+              alt="hero image"
+              className="w-full h-full"
+            />
+          </SwiperSlide>
         </Swiper>
         {/* <img src="/images/hero.jpg" alt="hero image" /> */}
         <div className="triangle-left absolute bottom-0 z-40"></div>
         <a
           href="/shop/all"
-          className="md:animate-none animate-bounce absolute z-40 text-white bottom-[5vw] right-[5vw] rounded-full p-4 flex flex-col justify-center bg-green-800 aspect-square place-items-center text-center shadow-2xl hover:scale-105 cursor-pointer"
+          className="md:animate-none animate-bounce absolute z-40 text-white bottom-[5vw] right-[5vw] rounded-full p-4 flex flex-col justify-center bg-green-800 aspect-square place-items-center text-center shadow-2xl hover:scale-110 transition-transform duration-300 cursor-pointer"
         >
           <h2>
             <b>PROMOTION</b>

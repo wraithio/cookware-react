@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useData } from "./src/context/DataProvider";
+import { useData } from "./context/DataProvider";
 import { X } from "lucide-react";
-import { addProduct, addProductDetails, blobUpload, getProductByName } from "./src/utils/DataServices";
+import { addProduct, addProductDetails, blobUpload, getProductByName } from "./utils/DataServices";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AddProductPage = () => {
   const {
@@ -41,7 +42,6 @@ const AddProductPage = () => {
   const [colorCode2, setColorCode2] = useState(null);
   const [colorCode3, setColorCode3] = useState(null);
   const [colorCode4, setColorCode4] = useState(null);
-  // const [isArchived, setIsArchived] = useState(null);
   const [toggleColor2, setToggleColor2] = useState(false);
   const [toggleColor3, setToggleColor3] = useState(false);
   const [toggleColor4, setToggleColor4] = useState(false);
@@ -52,6 +52,7 @@ const AddProductPage = () => {
   const array = [color1, color2, color3, color4];
   const array2 = [colorCode1, colorCode2, colorCode3, colorCode4];
   const array3 = [picFile1, picFile2, picFile3, picFile4];
+  const navigate = useNavigate();
   
   const addMoreColors = () => {
     if (!toggleColor2) setToggleColor2(true);
@@ -163,6 +164,7 @@ const AddProductPage = () => {
         modifiedDate: date,
       };
       await addProductDetails(details)
+      navigate("/dashboard")
     }
   };
 

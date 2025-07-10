@@ -94,7 +94,7 @@ h2 {
 }
 
 .circle-border {
-  border: 1px solid black;
+  border: 3px solid gray;
   height: 30px;
   width: 30px;
   border-radius: 50%;
@@ -191,14 +191,14 @@ input::-webkit-outer-spin-button {
   min-width: 0;
   height: 0;
   border-left: 100vw solid #ededed;
-  border-bottom: 150px solid transparent;
+  border-bottom: 200px solid transparent;
 }
 
 .triangle-left {
   min-width: 0;
   height: 0;
   border-right: 100vw solid #ededed;
-  border-top: 150px solid transparent;
+  border-top: 200px solid transparent;
 }
 
 /* #ededed */

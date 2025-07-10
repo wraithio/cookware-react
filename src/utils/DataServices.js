@@ -167,6 +167,22 @@ export const addProductDetails = async (entry) => {
   }
 };
 
+export const getAllProducts = async () => {
+  try {
+    const response = await fetch(`${api}Product/GetAllProducts`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch all products");
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error("Error during fetching all products:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
 export const getProductByName = async (product) => {
   try {
     const response = await fetch(`${api}Product/GetProductByName/${product}`);
@@ -179,6 +195,22 @@ export const getProductByName = async (product) => {
     return data; // Return the user data or token
   } catch (error) {
     console.error("Error during fetching product:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
+export const getDetailsbyId = async (productId) => {
+  try {
+    const response = await fetch(`${api}Details/GetDetailsByProductId/${productId}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch product details");
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error("Error during fetching product details:", error);
     throw error; // Propagate the error for further handling
   }
 };

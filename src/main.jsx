@@ -10,7 +10,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProductViewPage from "./ProductViewPage.jsx";
 import { DataProvider } from "./context/DataProvider.jsx";
 import DashboardPage from "./DashboardPage.jsx";
-import AddProductPage from "../AddProductPage.jsx";
+import AddProductPage from "./AddProductPage.jsx";
 
 createRoot(document.getElementById("root")).render(
   <DataProvider>

@@ -23,18 +23,18 @@ export const DataProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [admins, setAdmins] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async()  =>{
-        const allAdmins = await getUsers()
-        setAdmins(allAdmins.filter(admin => admin.isActive == true))
-    }
+  // useEffect(() => {
+  //   const fetchUsers = async()  =>{
+  //       const allAdmins = await getUsers()
+  //       setAdmins(allAdmins.filter(admin => admin.isActive == true))
+  //   }
 
-    if (admins.length != 0)
-      {
-        console.log(9)
-        fetchUsers()
-      }
-  })
+  //   if (admins.length == 0)
+  //     {
+  //       console.log("Fetching Admins...")
+  //       // fetchUsers()
+  //     }
+  // })
 
   const value = {
     userId,
