@@ -145,7 +145,7 @@ function App() {
       </div>
       <h1 className="md:text-6xl text-4xl md:mt-28 mt-14 mb-8">Best Sellers</h1>
       <div className="grid md:grid-cols-3 gap-3 mx-3">
-        <div className="md:h-[880px] h-[460px] md:border-2 border-gray-500 p-3 flex md:flex-col gap-3 relative">
+        <div className="md:h-[880px] h-[460px] md:border-2 border-gray-300 p-3 flex md:flex-col gap-3 relative">
           <CardComponent
             src={"/images/BestSeller1.jpg"}
             title={"Professional Stock Pot"}
@@ -158,13 +158,13 @@ function App() {
           </h3>
           <Link
             to={`/product/professional-stock-pot`}
-            className="hover:text-white hover:bg-black w-fit text-start border-2 border-gray-500 px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]"
+            className="hover:text-white hover:bg-black w-fit text-start border-2 border-gray-300 px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]"
           >
             SHOP NOW
           </Link>
         </div>
 
-        <div className="md:h-[880px] h-[460px] md:border-2 border-gray-500 p-3 flex md:flex-col md:justify-start justify-between md:gap-3 relative">
+        <div className="md:h-[880px] h-[460px] md:border-2 border-gray-300 p-3 flex md:flex-col md:justify-start justify-between md:gap-3 relative">
           <CardComponent
             src={"/images/BestSeller2.jpg"}
             title={"Cast Iron Dutch Oven"}
@@ -183,12 +183,12 @@ function App() {
           </h3>
           <Link
             to={`/product/cast-iron-dutch-oven`}
-            className="hover:text-white hover:bg-black w-fit text-start border-2 border-gray-500 px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]"
+            className="hover:text-white hover:bg-black w-fit text-start border-2 border-gray-300 px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]"
           >
             SHOP NOW
           </Link>
         </div>
-        <div className="md:h-[880px] h-[460px] md:border-2 border-gray-500 p-3 flex md:flex-col gap-3 relative">
+        <div className="md:h-[880px] h-[460px] md:border-2 border-gray-300 p-3 flex md:flex-col gap-3 relative">
           <CardComponent
             src={"/images/BestSeller3.jpg"}
             title={"Copper Sauce Pan"}
@@ -204,7 +204,7 @@ function App() {
           </h3>
           <Link
             to={`/product/copper-sauce-pan`}
-            className="hover:text-white hover:bg-black w-fit text-start border-2 border-gray-500 px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]"
+            className="hover:text-white hover:bg-black w-fit text-start border-2 border-gray-300 px-8 py-2 absolute md:left-[5%] left-[40%] md:bottom-[2%] bottom-[5%]"
           >
             SHOP NOW
           </Link>

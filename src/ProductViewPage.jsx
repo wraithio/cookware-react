@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import {
   createSlug,
+  formatProductName,
   getDetailsbyId,
   getProductByName,
 } from "./utils/DataServices";
@@ -28,6 +29,7 @@ const ProductViewPage = () => {
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [colorName, setColorName] = useState("");
+  const [hexcodes, setHexcodes] = useState([]);
 
   useEffect(() => {
     const fetchProduct = async (productSlug) => {
@@ -51,7 +53,13 @@ const ProductViewPage = () => {
         if (foundProduct) {
           setProductObj(foundProduct);
           setProductDet(await getDetailsbyId(foundProduct.id));
-          setColorName(foundProduct.colors[0])
+          setColorName(foundProduct.colors[0]);
+          for (let i = 0; i < foundProduct.colorHexCodes.length; i++) {
+            setHexcodes((prevItems) => [
+              ...prevItems,
+              { backgroundColor: `${foundProduct.colorHexCodes[i]}`},
+            ]);
+          }
         } else {
           console.error("Product not found for slug:", productSlug);
           // Handle product not found case
@@ -85,7 +93,7 @@ const ProductViewPage = () => {
     };
 
     if (product) {
-      fetchProduct("Copper Sauce Pan");
+      fetchProduct(formatProductName(product));
     }
   }, [product]); // Added product as dependency
 
@@ -94,9 +102,7 @@ const ProductViewPage = () => {
 
   // Show loading state
   if (loading) {
-    return (
-      <LoadingComponent title={`Loading ${productObj.name}...`}/>
-    );
+    return <LoadingComponent title={`Loading ${productObj.name}...`} />;
   }
 
   return (
@@ -233,16 +239,22 @@ const ProductViewPage = () => {
             {/* Quantity and Add to Cart */}
             <div className="space-y-4">
               <div>
-                 <label className="block text-sm font-medium text-gray-900 mb-2">
+                <label className="block text-start text-sm font-medium text-gray-900 mb-2">
                   Color: {colorName}
                 </label>
-                <div className="flex">
-                  {productObj.colorHexCodes.map((color,idx) => 
-                    
-                    <div key={idx} className={`w-12 h-12 rounded-md bg-[${color}] cursor-pointer relative bg-[#76727e]`} onClick={() => setColorName(productObj.colors[idx])}>
-                      {colorName == productObj.colors[idx] &&<div className="absolute w-12 h-12 rounded-md bg-transparent border-4 border-slate-950"></div>}
+                <div className="flex gap-2">
+                  {productObj.colorHexCodes.map((color, idx) => (
+                    <div
+                      key={idx}
+                      className={`w-12 h-12 rounded-md cursor-pointer relative border-1 shadow-md`}
+                      style={hexcodes[idx]}
+                      onClick={() => setColorName(productObj.colors[idx])}
+                    >
+                      {colorName == productObj.colors[idx] && (
+                        <div className="absolute w-12 h-12 rounded-md bg-transparent border-2 border-gray-500"></div>
+                      )}
                     </div>
-                  )}
+                  ))}
                 </div>
               </div>
               <div>

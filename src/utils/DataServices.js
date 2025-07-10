@@ -14,6 +14,13 @@ export const createSlug = (name) => {
     .replace(/-+/g, "-"); // Replace multiple hyphens with single hyphen
 };
 
+export const formatProductName = (slug) => {
+  return slug
+    .split('-') // Split the string by hyphens
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+    .join(' '); // Join the words with spaces
+}
+
 export const login = async (passkey) => {
   try {
     const response = await fetch(`${api}Admin/Login`, {

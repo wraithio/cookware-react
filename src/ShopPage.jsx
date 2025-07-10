@@ -115,7 +115,7 @@ const CookwareShop = () => {
   const filteredProducts =
     activeFilter === "all"
       ? products
-      : products.filter((product) => product.category === activeFilter);
+      : products.filter((product) => product.category.toLowerCase() === activeFilter);
 
   const sortedProducts = [...filteredProducts].sort((a, b) => {
     switch (sortBy) {
