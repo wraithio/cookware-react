@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import { useData } from "./context/DataProvider";
 import { Link } from "react-router-dom";
 import { KeyIcon, KeyRoundIcon } from "lucide-react";
+import LoadingComponent from "./components/LoadingComponent";
+import DashboardProductCard from "./components/DashboardProductCard";
+import { getAllProducts } from "./utils/DataServices";
 
 const DashboardPage = () => {
   const {
@@ -14,13 +18,32 @@ const DashboardPage = () => {
     cartItems,
     setCartItems,
   } = useData();
+  const [products, setProducts] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        setProducts(await getAllProducts());
+      } catch {
+        console.error("Fetch failed");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <LoadingComponent title={`Loading products...`} />;
+  }
 
   return (
     <>
       {!isAdmin ? (
         <div className="min-h-screen flex place-items-center flex-row gap-2 justify-center">
           <p>sign in to continue</p>
-          <KeyRoundIcon/>
+          <KeyRoundIcon />
         </div>
       ) : (
         <div>
@@ -51,9 +74,10 @@ const DashboardPage = () => {
                 </div>
                 <div className="flex items-center space-x-4">
                   <button className="bg-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-800 transition-colors">
-                    <Link to="/dashboard/add">
-                    Add Product
-                    </Link>
+                    <Link to="/dashboard/add">Add Product</Link>
+                  </button>
+                  <button className="bg-gray-900 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-800 transition-colors">
+                    <Link to="/dashboard/add">Log Out</Link>
                   </button>
                 </div>
               </div>
@@ -63,7 +87,9 @@ const DashboardPage = () => {
           <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             {/* <!-- Page Header --> */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Products</h2>
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                Products
+              </h2>
               <p className="text-gray-600">Manage your cookware inventory</p>
             </div>
 
@@ -185,8 +211,9 @@ const DashboardPage = () => {
             <div className="bg-white rounded-lg border border-gray-200">
               <div className="p-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                  {products.map((product,idx) => <DashboardProductCard product={product} key={idx}/>)}
                   {/* <!-- Product Card 1 --> */}
-                  <div className="group">
+                  {/* <div className="group">
                     <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
                       <img
                         src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
@@ -207,7 +234,9 @@ const DashboardPage = () => {
                         Professional grade 12" cast iron skillet
                       </p>
                       <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-900">$89.99</span>
+                        <span className="font-semibold text-gray-900">
+                          $89.99
+                        </span>
                         <span className="text-sm text-gray-500">Stock: 15</span>
                       </div>
                       <div className="flex gap-2 pt-2">
@@ -219,151 +248,7 @@ const DashboardPage = () => {
                         </button>
                       </div>
                     </div>
-                  </div>
-
-                  {/* <!-- Product Card 2 --> */}
-                  <div className="group">
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
-                      <img
-                        src="https://images.unsplash.com/photo-1565123409695-7b5ef63a2efb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Stainless Steel Pot Set"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-medium text-gray-900">
-                          Stainless Steel Pot Set
-                        </h3>
-                        <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
-                          Low Stock
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        Premium 5-piece stainless steel cookware set
-                      </p>
-                      <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-900">$249.99</span>
-                        <span className="text-sm text-gray-500">Stock: 3</span>
-                      </div>
-                      <div className="flex gap-2 pt-2">
-                        <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Edit
-                        </button>
-                        <button className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* <!-- Product Card 6 --> */}
-                  <div className="group">
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
-                      <img
-                        src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Cutting Board"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-medium text-gray-900">
-                          Bamboo Cutting Board
-                        </h3>
-                        <span className="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full">
-                          Low Stock
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        Large bamboo cutting board with groove
-                      </p>
-                      <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-900">$49.99</span>
-                        <span className="text-sm text-gray-500">Stock: 5</span>
-                      </div>
-                      <div className="flex gap-2 pt-2">
-                        <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Edit
-                        </button>
-                        <button className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* <!-- Product Card 7 --> */}
-                  <div className="group">
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
-                      <img
-                        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Mixing Bowls"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-medium text-gray-900">
-                          Stainless Steel Mixing Bowls
-                        </h3>
-                        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                          In Stock
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        Set of 3 nesting mixing bowls
-                      </p>
-                      <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-900">$34.99</span>
-                        <span className="text-sm text-gray-500">Stock: 8</span>
-                      </div>
-                      <div className="flex gap-2 pt-2">
-                        <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Edit
-                        </button>
-                        <button className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* <!-- Product Card 8 --> */}
-                  <div className="group">
-                    <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden mb-4">
-                      <img
-                        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80"
-                        alt="Dutch Oven"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-200"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <div className="flex justify-between items-start">
-                        <h3 className="font-medium text-gray-900">
-                          Enameled Dutch Oven
-                        </h3>
-                        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
-                          In Stock
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600">
-                        6-quart enameled cast iron dutch oven
-                      </p>
-                      <div className="flex justify-between items-center">
-                        <span className="font-semibold text-gray-900">$189.99</span>
-                        <span className="text-sm text-gray-500">Stock: 6</span>
-                      </div>
-                      <div className="flex gap-2 pt-2">
-                        <button className="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Edit
-                        </button>
-                        <button className="flex-1 bg-red-50 hover:bg-red-100 text-red-600 py-2 px-3 rounded-md text-sm font-medium transition-colors">
-                          Delete
-                        </button>
-                      </div>
-                    </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

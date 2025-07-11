@@ -12,6 +12,7 @@ import {
   CheckCircle,
   CircleXIcon,
   KeyRoundIcon,
+  LoaderCircleIcon,
   PlusCircleIcon,
   Settings,
   ShoppingCartIcon,
@@ -25,6 +26,7 @@ import {
   createAdmin,
   getUsers,
 } from "../utils/DataServices";
+import LoadingComponent from "./LoadingComponent";
 
 const NavbarComponent = () => {
   const {
@@ -48,6 +50,7 @@ const NavbarComponent = () => {
   const [passkey, setPasskey] = useState(null);
   const [addUser, setAddUser] = useState(false);
   const [isDuplicate, setIsDuplicate] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [newUser, setNewUser] = useState("");
 
   useEffect(() => {
@@ -93,11 +96,13 @@ const NavbarComponent = () => {
   };
 
   const handleSubmit = async (code) => {
-    if (isNaN(code)) {
+    if (isNaN(Number(code))) {
       setError(true);
+      setLoading(false);
       return;
     }
     if (await login(Number(code))) {
+      setLoading(false);
       setError(false);
       const fetchUsers = async () => {
         const allAdmins = await getUsers();
@@ -108,7 +113,11 @@ const NavbarComponent = () => {
         fetchUsers();
       }
       setSelectName(true);
-    } else setError(true);
+    } else {
+      console.log(1)
+      setError(true);
+      setLoading(false);
+    }
   };
 
   const handleKeyDown = (event) => {
@@ -316,15 +325,23 @@ const NavbarComponent = () => {
 
                       <div className="flex flex-col gap-2 items-center text-center">
                         <p>Enter the passkey:</p>
-                        <input
-                          maxLength={4}
-                          type="text"
-                          onChange={(e) => setPasskey(e.target.value)}
-                          onKeyDown={handleKeyDown}
-                          className={`rounded-md text-center ${
-                            error ? "border-red-500 animate-bounce-quick" : ""
-                          }`}
-                        />
+                        <div className="relative">
+                          <input
+                            maxLength={4}
+                            type="text"
+                            onChange={(e) => setPasskey(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            className={`rounded-md text-center ${
+                              error ? "border-red-500 animate-bounce-quick" : ""
+                            }`}
+                          />
+                          {loading && (
+                            <LoaderCircleIcon
+                              size={24}
+                              className="animate-spin absolute left-[80%] top-[20%]"
+                            />
+                          )}
+                        </div>
                         <button
                           className={`px-6 py-2 rounded-full border border-gray-300 transition-colors hover:bg-black hover:text-white`}
                           onClick={() => handleSubmit(passkey)}
