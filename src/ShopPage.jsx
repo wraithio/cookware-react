@@ -146,6 +146,10 @@ const CookwareShop = () => {
 
   const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
+   if (loading) {
+    return <LoadingComponent title={`Loading products...`} />;
+  }
+
   return (
     <div className="bg-gray-50 min-h-screen">
       {/* <Header cartItemCount={cartItemCount} /> */}
@@ -185,11 +189,9 @@ const CookwareShop = () => {
           sortBy={sortBy}
           setSortBy={setSortBy}
         />
-        {loading ? (
-          <LoadingComponent title="Loading products..." />
-        ) : (
+        
           <ProductGrid products={sortedProducts} onAddToCart={addToCart} />
-        )}
+        
 
         {/* Load More Button */}
         {/* <div className="text-center mt-12">
