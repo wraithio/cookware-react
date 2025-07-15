@@ -68,8 +68,8 @@ const ProductCard = ({ product, onAddToCart }) => {
         <p className="text-gray-600 text-sm mb-3">{product.shortDescription}</p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold text-gray-900">
-            ${productObj.price -
-                    (productObj.price * (productObj.discount / 100)).toFixed(2)}
+            ${product.price -
+                    (product.price * (product.discount / 100)).toFixed(2)}
           </span>
           <button 
             onClick={handleAddToCart}
