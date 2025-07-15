@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useData } from "./context/DataProvider";
 import { X } from "lucide-react";
-import { addProduct, addProductDetails, blobUpload, getProductByName } from "./utils/DataServices";
+import {
+  addProduct,
+  addProductDetails,
+  blobUpload,
+  getProductByName,
+} from "./utils/DataServices";
 import { Navigate, useNavigate } from "react-router-dom";
 
 const AddProductPage = () => {
@@ -53,7 +58,7 @@ const AddProductPage = () => {
   const array2 = [colorCode1, colorCode2, colorCode3, colorCode4];
   const array3 = [picFile1, picFile2, picFile3, picFile4];
   const navigate = useNavigate();
-  
+
   const addMoreColors = () => {
     if (!toggleColor2) setToggleColor2(true);
     if (toggleColor2) setToggleColor3(true);
@@ -73,13 +78,13 @@ const AddProductPage = () => {
     }
 
     if (e.target.files && e.target.files.length > 0) {
-          saveFile(e.target.files[0]);
-      }
+      saveFile(e.target.files[0]);
+    }
   };
 
   //We Need a useState for our file
 
-//A function that Gets our File / Sets our file 
+  //A function that Gets our File / Sets our file
   // const handleFileChange = (e,saveFile) => {
   //     if (e.target.files && e.target.files.length > 0) {
   //         saveFile(e.target.files[0]);
@@ -87,32 +92,32 @@ const AddProductPage = () => {
   // };
   //A Function that Handles the submitting of file to our backend
   const handleBlobSave = async (picFile) => {
-  //Prevent default so our app doesn't reload on submitting
-      // e.preventDefault();
-  
-		  //Check if the file is inside of our state Variable
-      if (!picFile) {
-          alert('Please select a file to upload.');
-          return;
-      }
-		  //A Unique file name so data isn't being overwritten in our blob
-      const uniqueFileName = `${Date.now()}-${picFile.name}`;
-		  
-		  //New Form Data Object to append our file and file name
-      const formData = new FormData();
-      formData.append('file', picFile);
-      formData.append('fileName', uniqueFileName);
-  
-		  //Finally passing that formData into our Backend
-      const uploadedUrl = await blobUpload(formData);
+    //Prevent default so our app doesn't reload on submitting
+    // e.preventDefault();
 
-      if (uploadedUrl) {
-          console.log('File uploaded at:', uploadedUrl);
-          return uploadedUrl;
-          // You can now store this URL in your component state or send it to your backend
-      }
-      return null;
+    //Check if the file is inside of our state Variable
+    if (!picFile) {
+      alert("Please select a file to upload.");
+      return;
     }
+    //A Unique file name so data isn't being overwritten in our blob
+    const uniqueFileName = `${Date.now()}-${picFile.name}`;
+
+    //New Form Data Object to append our file and file name
+    const formData = new FormData();
+    formData.append("file", picFile);
+    formData.append("fileName", uniqueFileName);
+
+    //Finally passing that formData into our Backend
+    const uploadedUrl = await blobUpload(formData);
+
+    if (uploadedUrl) {
+      console.log("File uploaded at:", uploadedUrl);
+      return uploadedUrl;
+      // You can now store this URL in your component state or send it to your backend
+    }
+    return null;
+  };
 
   const handleSubmit = async (bool) => {
     const colorArray = [];
@@ -128,14 +133,15 @@ const AddProductPage = () => {
       if (array3[i] !== null) imageArray.push(await handleBlobSave(array3[i]));
     }
     const date = new Date();
-    
+
     const overview = {
       id: 0,
+      foreignKey: 0,
       name: title,
       category: category,
       shortDescription: shortDescription,
-      price: Number(price),
-      discount: Number(discount),
+      price: price,
+      discount: discount,
       isOnSale: isOnSale,
       pictures: imageArray == [] ? null : imageArray,
       colors: colorArray == [] ? null : colorArray,
@@ -150,8 +156,8 @@ const AddProductPage = () => {
       const productToFind = await getProductByName(title);
       const details = {
         id: 0,
+        foreignKey: productToFind.foreignKey,
         productId: productToFind.id,
-        // productId: 2,
         material: material,
         capacity: capacity,
         dimensions: dimensions,
@@ -163,8 +169,8 @@ const AddProductPage = () => {
         modifiedBy: userId,
         modifiedDate: date,
       };
-      await addProductDetails(details)
-      navigate("/dashboard")
+      await addProductDetails(details);
+      navigate("/dashboard");
     }
   };
 
@@ -202,6 +208,7 @@ const AddProductPage = () => {
                     <input
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                      maxLength={40}
                       placeholder="e.g., Professional Chef's Pan"
                       onChange={(e) => setTitle(e.target.value)}
                       required
@@ -232,13 +239,17 @@ const AddProductPage = () => {
                     </select>
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div className="md:col-span-2 relative">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Short Description *
+                    </label>
+                    <label className="block text-sm font-medium text-gray-500 mb-2 absolute right-0 top-0 ">
+                      {shortDescription ? shortDescription.length : "0"} / 100
                     </label>
                     <textarea
                       onChange={(e) => setShortDescription(e.target.value)}
                       rows="3"
+                      maxLength={100}
                       className="w-full resize-none px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="Brief product description (max 200 characters)"
                     ></textarea>
@@ -559,6 +570,7 @@ const AddProductPage = () => {
                     <input
                       type="text"
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                      maxLength={30}
                       placeholder="Color name (e.g., Stainless Steel)"
                       onChange={(e) => setColor1(e.target.value)}
                     />
@@ -576,6 +588,7 @@ const AddProductPage = () => {
                       <input
                         type="text"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                        maxLength={30}
                         placeholder="Color name (e.g., Stainless Steel)"
                         onChange={(e) => setColor2(e.target.value)}
                       />
@@ -598,6 +611,7 @@ const AddProductPage = () => {
                       <input
                         type="text"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                        maxLength={30}
                         placeholder="Color name (e.g., Stainless Steel)"
                         onChange={(e) => setColor3(e.target.value)}
                       />
@@ -620,6 +634,7 @@ const AddProductPage = () => {
                       <input
                         type="text"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                        maxLength={30}
                         placeholder="Color name (e.g., Stainless Steel)"
                         onChange={(e) => setColor4(e.target.value)}
                       />
@@ -664,6 +679,7 @@ const AddProductPage = () => {
                     <input
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                      maxLength={50}
                       placeholder="e.g., Stainless Steel, Non-stick"
                       onChange={(e) => setMaterial(e.target.value)}
                     />
@@ -676,6 +692,7 @@ const AddProductPage = () => {
                     <input
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                      maxLength={50}
                       placeholder="e.g., 2.5 Quarts, 12 inches"
                       onChange={(e) => setCapacity(e.target.value)}
                     />
@@ -688,6 +705,7 @@ const AddProductPage = () => {
                     <input
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                      maxLength={50}
                       placeholder="e.g., 12 x 8 x 3 inches"
                       onChange={(e) => setDimensions(e.target.value)}
                     />
@@ -700,17 +718,22 @@ const AddProductPage = () => {
                     <input
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
+                      maxLength={50}
                       placeholder="e.g., 2.5 lbs"
                       onChange={(e) => setWeight(e.target.value)}
                     />
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div className="md:col-span-2 relative">
                     <label className="block text-sm font-medium text-gray-700 mb-2">
                       Care Instructions
                     </label>
+                    <label className="block text-sm font-medium text-gray-500 mb-2 absolute right-0 top-0 ">
+                      {care ? care.length : "0"} / 200
+                    </label>
                     <textarea
                       rows="3"
+                      maxLength={200}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                       placeholder="Care and maintenance instructions"
                       onChange={(e) => setCare(e.target.value)}
@@ -720,13 +743,16 @@ const AddProductPage = () => {
               </div>
 
               {/* <!-- Long Description --> */}
-              <div className="bg-white rounded-lg shadow-sm border p-6">
+              <div className="bg-white rounded-lg shadow-sm border p-6 relative">
                 <h3 className="text-lg font-semibold text-gray-900 mb-6">
                   Detailed Description
                 </h3>
-
+                <label className="block text-sm font-medium text-gray-500 mb-2 absolute right-0 top-0  p-4">
+                  {longDescription ? longDescription.length : "0"} / 500
+                </label>
                 <textarea
-                  rows="8"
+                  rows="7"
+                  maxLength={500}
                   className="w-full resize-none px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                   placeholder="Provide a detailed description of the product, including features, benefits, and usage recommendations..."
                   onChange={(e) => setLongDescription(e.target.value)}

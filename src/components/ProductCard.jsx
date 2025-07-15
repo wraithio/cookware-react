@@ -34,7 +34,7 @@ const ProductCard = ({ product, onAddToCart }) => {
     >
       <div className="aspect-square bg-gray-100 relative group">
         <img 
-          src={product.pictures[0]} 
+          src={`${product.pictures[0]}?format=webp&rel=preload`} 
           alt={product.name}
           className="w-full h-full object-cover"
         />
@@ -68,7 +68,8 @@ const ProductCard = ({ product, onAddToCart }) => {
         <p className="text-gray-600 text-sm mb-3">{product.shortDescription}</p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-bold text-gray-900">
-            ${product.price.toFixed(2)}
+            ${productObj.price -
+                    (productObj.price * (productObj.discount / 100)).toFixed(2)}
           </span>
           <button 
             onClick={handleAddToCart}

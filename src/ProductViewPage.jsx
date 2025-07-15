@@ -14,6 +14,7 @@ import {
   formatProductName,
   getDetailsbyId,
   getProductByName,
+  getProductsbyCategory,
 } from "./utils/DataServices";
 import { Link, useParams } from "react-router-dom";
 import LoadingComponent from "./components/LoadingComponent";
@@ -43,16 +44,15 @@ const ProductViewPage = () => {
         // const foundProduct = data.products.find(
         //   (p) => createSlug(p.name) === productSlug
         // );
-        // const foundSimilars = data.products.filter(
-        //   (product) => product.category == foundProduct.category
-        // );
-
+        
         // console.log("Found product:", foundProduct);
         // console.log("Found similars:", foundSimilars);\
         const foundProduct = await getProductByName(productSlug);
+        const foundSimilars = await getProductsbyCategory(foundProduct.category)
+        console.log(foundProduct)
         if (foundProduct) {
           setProductObj(foundProduct);
-          setProductDet(await getDetailsbyId(foundProduct.id));
+          setProductDet(await getDetailsbyId(foundProduct.foreignKey));
           setColorName(foundProduct.colors[0]);
           for (let i = 0; i < foundProduct.colorHexCodes.length; i++) {
             setHexcodes((prevItems) => [
@@ -72,19 +72,19 @@ const ProductViewPage = () => {
           });
         }
 
-        // if (foundSimilars.length !== 0) {
-        //   setSimilarProductObj(foundSimilars);
-        // } else {
-        //   console.error("Similar products were not found for:", productSlug);
-        //   // Handle no similars found case
-        //   setProductObj({
-        //     name: "No Similar Posts",
-        //     description: "",
-        //     price: null,
-        //     image: null,
-        //     category: "unknown",
-        //   });
-        // }
+        if (foundSimilars && foundSimilars.length !== 0) {
+          setSimilarProductObj(foundSimilars);
+        } else {
+          console.error("Similar products were not found for:", productSlug);
+          // Handle no similars found case
+          setProductObj({
+            name: "No Similar Posts",
+            description: "",
+            price: null,
+            image: null,
+            category: "unknown",
+          });
+        }
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
@@ -163,7 +163,7 @@ const ProductViewPage = () => {
           </div>
           {/* Similar Products */}
           <div className="lg:row-start-2 row-start-4">
-            {/* {similarProductObj.length !== 0 && (
+            {similarProductObj.length !== 0 && (
               <div className="flex flex-col gap-2">
                 <h3 className="font-medium text-gray-900">Similar Products</h3>
                 <div className="flex justify-center">
@@ -177,9 +177,9 @@ const ProductViewPage = () => {
                         >
                           <div className="flex justify-center">
                             <img
-                              src={product.image}
+                              src={product.pictures[0]}
                               alt={product.name}
-                              className="w-full max-w-96 aspect-square"
+                              className="w-full max-w-96 aspect-square object-cover"
                             />
                           </div>
                           <p>{product.name}</p>
@@ -189,7 +189,7 @@ const ProductViewPage = () => {
                   </div>
                 </div>
               </div>
-            )} */}
+            )}
           </div>
 
           {/* Product Details */}

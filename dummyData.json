@@ -1,74 +1,104 @@
- {"products" : [
-    {
-      "id": 1,
-      "name": "Professional Stock Pot",
-      "description": "12-inch ceramic non-stick coating",
-      "price": 89.99,
-      "image": "/images/BestSeller1.jpg",
-      "category": "pots"
-    },
-    {
-      "id": 2,
-      "name": "Cast Iron Dutch Oven",
-      "description": "5.5-quart enameled cast iron",
-      "price": 159.99,
-      "image": "/images/BestSeller2.jpg",
-      "category": "pots"
-    },
-    {
-      "id": 3,
-      "name": "Copper Sauce Pan",
-      "description": "10-inch tri-ply construction",
-      "price": 124.99,
-      "image": "/images/BestSeller3.jpg",
-      "category": "pans"
-    },
-    {
-      "id": 4,
-      "name": "Classic Dutch Oven",
-      "description": "12-piece stainless steel set",
-      "price": 399.99,
-      "image": "/images/NewArrivals1.jpg",
-      "category": "pots"
-    },
-    {
-      "id": 5,
-      "name": "Nonstick Wok 14 Inch",
-      "description": "2-piece with glass lids",
-      "price": 79.99,
-      "image": "/images/NewArrivals2.jpg",
-      "category": "sets"
-    },
-    {
-      "id": 6,
-      "name": "Cast Iron Pot",
-      "description": "5-piece silicone and steel",
-      "price": 49.99,
-      "image": "/images/StartCooking1.jpeg",
-      "category": "pots"
-    },
-    {
-      "id": 7,
-      "name": "Carbon Steel Stock Pot",
-      "description": "14-inch traditional style",
-      "price": 69.99,
-      "image": "/images/StartCooking2.jpeg",
-      "category": "pots"
-    },
-    {
-      "id": 8,
-      "name": "Cast Iron Sauce Pan",
-      "description": "3-piece eco-friendly boards",
-      "price": 34.99,
-      "image": "/images/StartCooking3.jpeg",
-      "category": "pans"
-    },
-    {
-      "id": 9,
-      "name": "Premium Utensil Set",
-      "description": "5-piece silicone and steel",
-      "price": 34.99,
-      "image": "/images/StartCooking4.jpeg",
-      "category": "accessories"
-    }
-  ]}
+[
+  {
+    "id": 1,
+    "name": "Professional Stock Pot",
+    "category": "pots",
+    "shortDescription": "Heavy-duty stock pot perfect for soups and stews.",
+    "price": 59.99,
+    "discount": 10.0,
+    "isOnSale": true,
+    "pictures": ["/images/stockpot1.jpg", "/images/stockpot2.jpg"],
+    "colors": ["Silver", "Black"],
+    "colorHexCodes": ["#C0C0C0", "#000000"],
+    "createdBy": 101,
+    "createdDate": "2025-06-01T00:00:00Z",
+    "modifiedBy": 101,
+    "modifiedDate": "2025-07-14T00:00:00Z",
+    "isArchived": false
+  },
+  {
+    "id": 2,
+    "name": "Cast Iron Dutch Oven",
+    "category": "pots",
+    "shortDescription": "Durable cast iron for slow cooking and roasting.",
+    "price": 79.99,
+    "discount": 15.0,
+    "isOnSale": true,
+    "pictures": ["/images/dutchoven1.jpg"],
+    "colors": ["Red", "Gray"],
+    "colorHexCodes": ["#FF0000", "#808080"],
+    "createdBy": 102,
+    "createdDate": "2025-05-20T00:00:00Z",
+    "modifiedBy": 103,
+    "modifiedDate": "2025-07-10T00:00:00Z",
+    "isArchived": false
+  },
+  {
+    "id": 3,
+    "name": "Copper Sauce Pan",
+    "category": "Cookware",
+    "shortDescription": "Elegant copper saucepan for gourmet preparation.",
+    "price": 49.99,
+    "discount": 5.0,
+    "isOnSale": false,
+    "pictures": ["/images/saucepan.jpg"],
+    "colors": ["Copper", "Black"],
+    "colorHexCodes": ["#B87333", "#000000"],
+    "createdBy": 104,
+    "createdDate": "2025-04-15T00:00:00Z",
+    "modifiedBy": 105,
+    "modifiedDate": "2025-07-01T00:00:00Z",
+    "isArchived": false
+  },
+  {
+    "id": 4,
+    "name": "Classic Dutch Oven",
+    "category": "Cookware",
+    "shortDescription": "Timeless design and performance for home chefs.",
+    "price": 65.0,
+    "discount": 0.0,
+    "isOnSale": false,
+    "pictures": ["/images/classicdutchoven.jpg"],
+    "colors": ["Blue", "White"],
+    "colorHexCodes": ["#0000FF", "#FFFFFF"],
+    "createdBy": 106,
+    "createdDate": "2025-03-30T00:00:00Z",
+    "modifiedBy": 106,
+    "modifiedDate": "2025-07-14T00:00:00Z",
+    "isArchived": false
+  },
+  {
+    "id": 5,
+    "name": "Nonstick Wok 14 Inch",
+    "category": "Cookware",
+    "shortDescription": "Spacious and slick wok for stir-fry perfection.",
+    "price": 42.5,
+    "discount": 7.5,
+    "isOnSale": true,
+    "pictures": ["/images/wok.jpg"],
+    "colors": ["Black"],
+    "colorHexCodes": ["#000000"],
+    "createdBy": 107,
+    "createdDate": "2025-06-05T00:00:00Z",
+    "modifiedBy": 107,
+    "modifiedDate": "2025-07-13T00:00:00Z",
+    "isArchived": false
+  },
+  {
+    "id": 6,
+    "name": "Premium Utensil Set",
+    "category": "Accessories",
+    "shortDescription": "High-quality tools for every culinary task.",
+    "price": 34.99,
+    "discount": 0.0,
+    "isOnSale": false,
+    "pictures": ["/images/utensilset.jpg"],
+    "colors": ["Wood", "Silver"],
+    "colorHexCodes": ["#A0522D", "#C0C0C0"],
+    "createdBy": 108,
+    "createdDate": "2025-06-25T00:00:00Z",
+    "modifiedBy": 109,
+    "modifiedDate": "2025-07-14T00:00:00Z",
+    "isArchived": false
+  }
+]

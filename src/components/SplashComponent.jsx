@@ -23,9 +23,9 @@ const SplashComponent = () => {
   return (
     <div>
       {/* <div className="w-full h-full bg-white/1 backdrop-blur-sm"></div> */}
-      <div className="relative text-start pt-[10%]">
+      <div className="relative text-start pt-[5%]">
         <Reveal1>
-          <h1 className="text-[15vw] text-5xl">COOKWARE</h1>
+          <h1 className="text-[10vw] text-5xl">COOKWARE</h1>
         </Reveal1>
         <div className="flex justify-between mx-[5vw]">
           <section className="flex gap-3">

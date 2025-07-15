@@ -176,7 +176,7 @@ export const addProductDetails = async (entry) => {
 
 export const getAllProducts = async () => {
   try {
-    const response = await fetch(`${api}Product/GetAllProducts`);
+    const response = await fetch(`${api}Product/GetLiveProducts`);
 
     if (!response.ok) {
       throw new Error("Failed to fetch all products");
@@ -202,6 +202,22 @@ export const getProductByName = async (product) => {
     return data; // Return the user data or token
   } catch (error) {
     console.error("Error during fetching product:", error);
+    throw error; // Propagate the error for further handling
+  }
+};
+
+export const getProductsbyCategory = async (category) => {
+  try {
+    const response = await fetch(`${api}Product/GetProductsbyCategory/${category}`);
+
+    if (!response.ok) {
+      throw new Error(`Failed to fetch ${category} products`);
+    }
+
+    const data = await response.json();
+    return data; // Return the user data or token
+  } catch (error) {
+    console.error(`Error during fetching ${category}:`, error);
     throw error; // Propagate the error for further handling
   }
 };
