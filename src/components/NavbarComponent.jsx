@@ -114,7 +114,7 @@ const NavbarComponent = () => {
       }
       setSelectName(true);
     } else {
-      console.log(1)
+      console.log(1);
       setError(true);
       setLoading(false);
     }
@@ -266,11 +266,12 @@ const NavbarComponent = () => {
                             onClick={() => setAddUser(true)}
                           >
                             <PlusCircleIcon />
-                            <i>add a new user</i>
+                            <label for="new-user">add a new user</label>
                           </div>
                           {addUser && (
                             <div className="flex justify-between place-items-center gap-2 p-2 my-2">
                               <input
+                                id="new-user"
                                 type="text"
                                 placeholder="new user"
                                 maxLength={15}
@@ -324,9 +325,10 @@ const NavbarComponent = () => {
                       )}
 
                       <div className="flex flex-col gap-2 items-center text-center">
-                        <p>Enter the passkey:</p>
+                        <label for="passkey">Enter the passkey:</label>
                         <div className="relative">
                           <input
+                            id="passkey"
                             maxLength={4}
                             type="text"
                             onChange={(e) => setPasskey(e.target.value)}

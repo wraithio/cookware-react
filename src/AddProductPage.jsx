@@ -202,10 +202,11 @@ const AddProductPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="product-title" className="block text-sm font-medium text-gray-700 mb-2">
                       Product Title *
                     </label>
                     <input
+                    id="product-title"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       maxLength={40}
@@ -265,7 +266,7 @@ const AddProductPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="price" className="block text-sm font-medium text-gray-700 mb-2">
                       Price *
                     </label>
                     <div className="relative">
@@ -273,6 +274,7 @@ const AddProductPage = () => {
                         $
                       </span>
                       <input
+                      id="price"
                         type="number"
                         step="0.01"
                         className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
@@ -283,11 +285,12 @@ const AddProductPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="discount" className="block text-sm font-medium text-gray-700 mb-2">
                       Discount Percentage
                     </label>
                     <div className="relative">
                       <input
+                      id="discount"
                         type="number"
                         min="0"
                         max="100"
@@ -301,8 +304,9 @@ const AddProductPage = () => {
                     </div>
                   </div>
                   <div className="flex gap-2 place-items-center">
-                    <p>Activate Sale?</p>
+                    <label for="on-sale">Activate Sale?</label>
                     <input
+                    id="on-sale"
                       type="checkbox"
                       onChange={(e) => setIsOnSale(e.target.checked)}
                     />
@@ -351,6 +355,7 @@ const AddProductPage = () => {
                       )}
                     </label>
                     <input
+                    
                       type="file"
                       accept="image/*"
                       id="image1button"
@@ -561,13 +566,14 @@ const AddProductPage = () => {
 
               {/* <!-- Color Options --> */}
               <div className="bg-white rounded-lg shadow-sm border p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-6">
+                <label for="color-options" className="text-lg font-semibold text-gray-900 mb-6">
                   Color Options
-                </h3>
+                </label>
 
                 <div id="colorOptions" className="space-y-3">
                   <div className="flex items-center space-x-3">
                     <input
+                    id="color-options"
                       type="text"
                       className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       maxLength={30}
@@ -575,6 +581,8 @@ const AddProductPage = () => {
                       onChange={(e) => setColor1(e.target.value)}
                     />
                     <input
+                                        id="color-options"
+
                       type="color"
                       className="w-12 h-10 border border-gray-300 rounded-md cursor-pointer"
                       onChange={(e) => setColorCode1(e.target.value)}
@@ -586,6 +594,8 @@ const AddProductPage = () => {
                   {toggleColor2 && (
                     <div className="flex items-center space-x-3">
                       <input
+                                          id="color-options"
+
                         type="text"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                         maxLength={30}
@@ -593,6 +603,8 @@ const AddProductPage = () => {
                         onChange={(e) => setColor2(e.target.value)}
                       />
                       <input
+                                          id="color-options"
+
                         type="color"
                         className="w-12 h-10 border border-gray-300 rounded-md cursor-pointer"
                         onChange={(e) => setColorCode2(e.target.value)}
@@ -609,6 +621,8 @@ const AddProductPage = () => {
                   {toggleColor3 && (
                     <div className="flex items-center space-x-3">
                       <input
+                                          id="color-options"
+
                         type="text"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                         maxLength={30}
@@ -616,6 +630,8 @@ const AddProductPage = () => {
                         onChange={(e) => setColor3(e.target.value)}
                       />
                       <input
+                                          id="color-options"
+
                         type="color"
                         className="w-12 h-10 border border-gray-300 rounded-md cursor-pointer"
                         onChange={(e) => setColorCode3(e.target.value)}
@@ -632,6 +648,8 @@ const AddProductPage = () => {
                   {toggleColor4 && (
                     <div className="flex items-center space-x-3">
                       <input
+                                          id="color-options"
+
                         type="text"
                         className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                         maxLength={30}
@@ -639,6 +657,8 @@ const AddProductPage = () => {
                         onChange={(e) => setColor4(e.target.value)}
                       />
                       <input
+                                          id="color-options"
+
                         type="color"
                         className="w-12 h-10 border border-gray-300 rounded-md cursor-pointer"
                         onChange={(e) => setColorCode4(e.target.value)}
@@ -673,10 +693,11 @@ const AddProductPage = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="material" className="block text-sm font-medium text-gray-700 mb-2">
                       Material
                     </label>
                     <input
+                    id="material"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       maxLength={50}
@@ -686,10 +707,11 @@ const AddProductPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="capacity" className="block text-sm font-medium text-gray-700 mb-2">
                       Capacity
                     </label>
                     <input
+                    id="capacity"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       maxLength={50}
@@ -699,10 +721,11 @@ const AddProductPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="dimensions" className="block text-sm font-medium text-gray-700 mb-2">
                       Dimensions
                     </label>
                     <input
+                    id="dimensions"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       maxLength={50}
@@ -712,10 +735,11 @@ const AddProductPage = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label for="weight" className="block text-sm font-medium text-gray-700 mb-2">
                       Weight
                     </label>
                     <input
+                    id="weight"
                       type="text"
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-primary focus:border-transparent"
                       maxLength={50}
